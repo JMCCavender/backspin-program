@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "backspin-program",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8371", "--directory", "/Users/jamie/Developer/baseball/anderson-miller"],
+      "port": 8371
+    }
+  ]
+}

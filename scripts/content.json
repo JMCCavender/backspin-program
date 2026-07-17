@@ -1,0 +1,649 @@
+{
+  "phases": [
+    {
+      "n": 0,
+      "name": "Orientation",
+      "videos": [
+        {
+          "id": "ZfE_8LGfCZg",
+          "overview": "Anderson's foundational talk from 9 years in the minors: your career has an expiration date, and accepting that is what sets you free to play without fear. This frames the mental ownership that everything else in the curriculum builds on.",
+          "takeaways": [
+            "Your career will end — accepting that removes the fear that ruins at-bats.",
+            "Nobody is coming to save you; take ownership of your mental game now.",
+            "Start from knowing things can go wrong, not hoping they won't."
+          ]
+        },
+        {
+          "id": "KASp0Jh7jb8",
+          "overview": "Three hard-earned lessons from nearly a decade of minor-league baseball — the strikeouts, setbacks, and small wins that kept the dream alive. Real talk about the journey before you dive into mechanics.",
+          "takeaways": [
+            "The grind outlasts talent — how you handle setbacks defines your ceiling.",
+            "Small victories compound; look for them when the dream feels distant.",
+            "Learn from someone else's 9 years so you don't repeat the same mistakes."
+          ]
+        },
+        {
+          "id": "K66ppkU6V9g",
+          "overview": "The mindset shift that flips the power dynamic of every at-bat: the pitcher has to get YOU out. A short reminder of who's actually in charge at the plate.",
+          "takeaways": [
+            "The pitcher is the one under pressure — he has to get you out.",
+            "Walk into the box with the mentality of the attacker, not the defender.",
+            "Confidence is a decision you make before the at-bat, not a result of it."
+          ]
+        }
+      ]
+    },
+    {
+      "n": 1,
+      "name": "The Setup",
+      "videos": [
+        {
+          "id": "kiUMz_HTyFw",
+          "overview": "The 90-second introduction to the 11-part Setup series — a step-by-step breakdown of every part of the stance that leads to an efficient, effortless swing. Watch this to understand why the series is sequenced the way it is.",
+          "takeaways": [
+            "The setup is a system — each piece builds on the one before it.",
+            "An elite swing starts before the pitcher ever moves.",
+            "Commit to the full series in order; don't cherry-pick parts."
+          ]
+        },
+        {
+          "id": "4fGmBEp7X38",
+          "overview": "The swing gets built from the ground up, and everything starts with the feet. Part 1 covers foot placement, width, and angles that put the rest of your body in position to work.",
+          "takeaways": [
+            "Feet are the foundation — a flawed base compromises everything above it.",
+            "Stance width and foot angle set up how your hips can move.",
+            "Get the ground connection right before touching anything else."
+          ]
+        },
+        {
+          "id": "gy5QBkkFKXI",
+          "overview": "Part 2 covers the back hip and pelvis — what Anderson calls the power steering and driver of your swing. How you preset the back hip determines how you load and deliver.",
+          "takeaways": [
+            "The back hip is the driver of the swing — set it up to steer.",
+            "Pelvis position at setup dictates your load, not effort mid-swing.",
+            "Feel the back hip carry you into the ball rather than spinning open."
+          ]
+        },
+        {
+          "id": "OI9BLiKqniA",
+          "overview": "Part 3: posture sets the stage for a swing path that works around you, not across you, without holes. This is the setup piece that most directly shapes your barrel path.",
+          "takeaways": [
+            "Good posture creates a path around your body, not across it.",
+            "Holes in the swing usually trace back to posture at setup.",
+            "Set your hinge and spine angle before the pitch, then maintain it."
+          ]
+        },
+        {
+          "id": "R-52BFJS2go",
+          "overview": "Part 4 works backward from the most important checkpoint: where your body needs to be at contact. Being behind the baseball is a non-negotiable, and this video shows what that actually looks like.",
+          "takeaways": [
+            "Build the setup by reverse-engineering your position at contact.",
+            "Behind the ball at contact is a non-negotiable, not a style choice.",
+            "Check contact position on video — feel lies, positions don't."
+          ]
+        },
+        {
+          "id": "MVo4qTKT1aQ",
+          "overview": "Part 5 explains what your shoulders are doing in the setup and swing. Clean lanes win — shoulder position either creates a clear path to the ball or blocks it.",
+          "takeaways": [
+            "Shoulders create the lane the barrel travels through.",
+            "A closed-off or over-tilted shoulder line adds length and holes.",
+            "Set the shoulders so the hands have a direct route to contact."
+          ]
+        },
+        {
+          "id": "zCJG5YQss18",
+          "overview": "Part 6 cuts through the noise around 'scap load' — what loading the scap actually means versus gripping with the lats, and why confusing the two creates tension. Anderson goes shirtless to make the anatomy unmistakable.",
+          "takeaways": [
+            "Scap load and lat tension are different things — know which you're feeling.",
+            "Overdoing 'scap load' cues creates tightness that slows the swing.",
+            "Load should feel athletic and springy, not pinned or clenched."
+          ]
+        },
+        {
+          "id": "od1GXsnT1B0",
+          "overview": "Part 7: setting the arms up correctly makes executing the swing simple — setting them up wrong makes consistent backspin nearly impossible. Covers arm slot, bend, and tension at setup.",
+          "takeaways": [
+            "Arm setup decides whether the hands' job is easy or hard.",
+            "Soft, athletic arms at setup; rigid arms create a pushy delivery.",
+            "The arms deliver the barrel — they don't generate the power."
+          ]
+        },
+        {
+          "id": "sZ0UfG9ZHr0",
+          "overview": "Part 8 covers the grip — get it right and everything downstream gets simpler. How the bat sits in your hands affects barrel control, whip, and what your wrists can do at contact.",
+          "takeaways": [
+            "Grip in the fingers, not jammed in the palms.",
+            "Grip pressure should stay light until contact demands it.",
+            "A correct grip lets the barrel release without manipulation."
+          ]
+        },
+        {
+          "id": "LcB5WIn3l_8",
+          "overview": "Part 9 is the payoff: all the setup work exists so the hands can execute directly to and then through contact. Covers what a direct hand path actually looks like and feels like.",
+          "takeaways": [
+            "The whole setup exists to give the hands a short, direct path.",
+            "Work to contact, then through it — two parts of one move.",
+            "If the hands have to reroute, fix the setup, not the hands."
+          ]
+        },
+        {
+          "id": "dB9uEvrs9j0",
+          "overview": "Part 10 closes the series with the head and eyes — the pieces that bring everything together. Where your eyes are anchored determines whether the rest of the system can do its job.",
+          "takeaways": [
+            "The head is the anchor; if it drifts, the swing drifts with it.",
+            "Quiet eyes let you track longer and swing at better pitches.",
+            "Head and eyes behind the ball ties the whole setup together."
+          ]
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "name": "Backspin & Swing Fundamentals",
+      "videos": [
+        {
+          "id": "bss1ENcrXSA",
+          "overview": "Anderson's map of the six most important parts of hitting if you want to become elite. This is the conceptual framework the rest of the curriculum plugs into — watch it before the deep dives.",
+          "takeaways": [
+            "Elite hitting breaks down into 6 learnable areas — master them in order.",
+            "Knowing the framework tells you what any drill is actually for.",
+            "MLB hitters separate themselves by owning all six, not just one."
+          ]
+        },
+        {
+          "id": "Dixkeb56cOU",
+          "overview": "Why posture is the most overlooked driver of power and consistency. From athletic stance to contact point, your body position determines exit velo and whether balls get driven or popped up.",
+          "takeaways": [
+            "Posture is the link between your stance and your contact point.",
+            "Lost posture mid-swing means lost barrel accuracy and power.",
+            "Balanced posture improves swing plane and timing at the same time."
+          ]
+        },
+        {
+          "id": "bRgblxv-BQk",
+          "overview": "The thesis video: why backspin is the #1 priority in your swing. Proper backspin gives you the most room for error, effortless carry, and the ball flight that scouts and coaches recognize instantly.",
+          "takeaways": [
+            "Backspin is the top priority because it maximizes room for error.",
+            "True backspin carry is the signature of an efficient bat path.",
+            "Chase ball flight quality, and mechanics organize themselves around it."
+          ]
+        },
+        {
+          "id": "Nt-WVUZP9YQ",
+          "overview": "Anderson calls this his best video: not all backspin is created equal. How to compress the ball and create backspin to all fields without the slice, hook, or steep chop that over-spins it.",
+          "takeaways": [
+            "How you create backspin matters more than the spin itself.",
+            "Compression first — backspin without compression is a slice.",
+            "The right backspin works to all fields, not just pull side."
+          ]
+        },
+        {
+          "id": "8FiVgdI0tXc",
+          "overview": "The step-by-step guide to structuring tee work around creating backspin — hand position, path adjustments, and how to read the ball flight off the tee so every rep teaches you something.",
+          "takeaways": [
+            "Tee work is a feedback loop: read the flight of every single rep.",
+            "Set the tee and your intent for line drives with carry, not scoops.",
+            "Backspin off the tee is the entry-level test of a clean path."
+          ]
+        },
+        {
+          "id": "EK8sDDAZCZk",
+          "overview": "A focused drill to find your launch position — the slot your body and hands need to arrive in for the swing to be simple and powerful. Fix this checkpoint and backspin gets a lot easier.",
+          "takeaways": [
+            "Launch position is the checkpoint everything before it serves.",
+            "Find the slot with the drill, then rebuild speed around it.",
+            "Effortless power comes from position, not extra effort."
+          ]
+        },
+        {
+          "id": "AoaVTpF6gUg",
+          "overview": "The follow-up on launch position: break the swing down to build it back better. Why hitting from launch position in training tightens up your full swing and ball flight.",
+          "takeaways": [
+            "Training from launch position isolates the delivery of the barrel.",
+            "Shorter moves expose flaws that full swings hide.",
+            "Master the partial before you demand it at full speed."
+          ]
+        },
+        {
+          "id": "qsB65489_eU",
+          "overview": "Why vertical bat angle at launch matters so much: keeping the barrel up gives you maximum room for success. What barrel-up does for your path, what happens when you lose it, and how to train it.",
+          "takeaways": [
+            "Barrel up at launch = maximum margin for error at contact.",
+            "A flat or dumped barrel forces perfect timing to survive.",
+            "Master the setup and vertical barrel, and hitting gets fun again."
+          ]
+        },
+        {
+          "id": "W6aVUzZfvqQ",
+          "overview": "A short visual argument that the golf swing plane and the baseball swing are the same move: a path that works around you, creating room for air and consistent flight — not flat and across you.",
+          "takeaways": [
+            "The swing works around your body, like a golf swing plane.",
+            "Across-the-ball paths kill backspin; around-the-body paths create it.",
+            "Match path with contact point and timing for consistent flight."
+          ]
+        },
+        {
+          "id": "76Mco07iFdw",
+          "overview": "Bonus deep dive: the one adjustment that separates hitters who backspin the ball with intent from those hitting lazy fly balls and rollovers. The bridge between having power and showing it in games.",
+          "takeaways": [
+            "One path adjustment unlocks pull-side backspin with intent.",
+            "Power that doesn't show up in games is usually a spin problem.",
+            "Feel, barrel control, and intent turn doubles into home runs."
+          ]
+        },
+        {
+          "id": "0d3GvBlivr8",
+          "overview": "Bonus case study: six different hitters, one goal — pull-side backspin with control and power. Watch how the same destination requires a different path for every hitter.",
+          "takeaways": [
+            "One goal, six different paths — fixes must fit the hitter.",
+            "Diagnose the individual cause before applying a generic cue.",
+            "Watching others get fixed sharpens your eye for your own swing."
+          ]
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "name": "Diagnosing & Fixing Swing Flaws",
+      "videos": [
+        {
+          "id": "OLuXSQ3YiPg",
+          "overview": "The two swing flaws Anderson sees in almost every non-MLB hitter he works with, filmed fresh off in-person sessions. If you hook balls low to the pull side and slice everything oppo, start here.",
+          "takeaways": [
+            "Two flaws account for most amateur ball-flight problems.",
+            "Pull-side hook + oppo slice is the classic symptom pair.",
+            "Check yourself for both before working on anything fancier."
+          ]
+        },
+        {
+          "id": "PomIDUjKpFI",
+          "overview": "A pre-hitting checklist: three things that may be killing your ability to backspin the ball, and how mastering your setup simplifies pull-side backspin before you take a single swing.",
+          "takeaways": [
+            "Run the 3-point check before every session, not after bad rounds.",
+            "Most backspin problems are setup problems in disguise.",
+            "Simple beats complicated — remove causes instead of adding cues."
+          ]
+        },
+        {
+          "id": "FFYEXXeoPqU",
+          "overview": "Everyone criticizes the 'get the foot down early' cue — Anderson offers the actual solution: why the problem happens, how to fix it, and how to train out of it for good.",
+          "takeaways": [
+            "'Foot down early' often creates a pause that kills rhythm.",
+            "The fix is timing the landing into the swing, not before it.",
+            "Train the transition until the stride and swing feel like one move."
+          ]
+        },
+        {
+          "id": "OtAgHUn3VRA",
+          "overview": "Post-contact direction is the difference between average and great hitters. How your direction to and through contact controls backspin and eliminates pull-side hook and oppo slice.",
+          "takeaways": [
+            "Where your swing goes after contact reveals its true direction.",
+            "Pulling off the ball shows up as hook and slice ball flight.",
+            "Hold your direction through the ball, not just to it."
+          ]
+        },
+        {
+          "id": "nnnNfx2j5ZY",
+          "overview": "More space, more room to win. Why a pushy swing path does no damage, and how understanding spacing — the room between you and the ball — creates a path that can actually drive it.",
+          "takeaways": [
+            "A pushy swing is a spacing problem, not a hands problem.",
+            "Give yourself room and the barrel can work behind the ball.",
+            "Space equals margin: crowded swings have no room to win."
+          ]
+        },
+        {
+          "id": "mp7IXjXlyh4",
+          "overview": "Eyes and body behind the ball before you hit through it. The full breakdown of body position before, at, and through contact, and how it drives your ability to backspin the ball to all fields.",
+          "takeaways": [
+            "Get behind the ball first — then you can hit through it.",
+            "Position before contact determines what contact can be.",
+            "Behind the ball gives you maximum room for success to all fields."
+          ]
+        },
+        {
+          "id": "DAwmZeJYspA",
+          "overview": "The back knee's underrated role in an elite, simple swing: a consistent move to the baseball that produces more power, more consistent barrels, and a swing that stays adjustable at the top level.",
+          "takeaways": [
+            "The back knee controls your move to the ball — watch what it does.",
+            "A stable back knee keeps the swing simple and repeatable.",
+            "Power, adjustability, and consistency all route through this joint."
+          ]
+        },
+        {
+          "id": "uVl-CuijK7M",
+          "overview": "Stop endlessly tinkering with swing path — fix your spacing instead. Space away from you, space behind you, spacing and angles: the frame that lets any path work.",
+          "takeaways": [
+            "Path problems are usually spacing problems upstream.",
+            "Create space away from you and behind you before contact.",
+            "Fix the frame (spacing) and the picture (path) fixes itself."
+          ]
+        },
+        {
+          "id": "a6xtSkcsxBE",
+          "overview": "A quick, simple posture fix for better consistency and ball flight to all fields — a problem that comes up constantly with the hitters Anderson trains.",
+          "takeaways": [
+            "One posture adjustment cleans up flight to all fields.",
+            "Recheck posture whenever consistency suddenly disappears.",
+            "Small setup fixes beat big mid-swing rebuilds."
+          ]
+        },
+        {
+          "id": "zj8DLq5zQjs",
+          "overview": "Control your direction to become the best hitter you can be. A short, focused fix: better direction equals better ball flight to all fields.",
+          "takeaways": [
+            "Direction is a skill you train, not a byproduct.",
+            "Bad flight to one field traces to one directional leak.",
+            "Simple cue: pick a direction and hold it through contact."
+          ]
+        },
+        {
+          "id": "_TjBNHlPoW4",
+          "overview": "The simplified guide to eliminating pull-side hook and oppo slice so you can create clean ball flight to all fields — the two ugly misses, one root cause, one fix.",
+          "takeaways": [
+            "Hook and slice are the same flaw expressed to different fields.",
+            "Clean flight to all fields is the true test of a fixed path.",
+            "Keep it simple: one feel, applied everywhere."
+          ]
+        },
+        {
+          "id": "yuLKH9amEQM",
+          "overview": "How angle work — hitting off angled feeds and setups — unlocks a new level of pull-side ball flight by forcing your path and spacing to organize correctly.",
+          "takeaways": [
+            "Angles force the swing to solve problems reps can't.",
+            "Pull-side quality improves fastest with angle constraints.",
+            "Use angle work to test whether your fix actually holds."
+          ]
+        },
+        {
+          "id": "lw8FCiOPZSE",
+          "overview": "Two simple drills to improve your swing path and launch position at the same time — simplify backspin and create effortless power with better position and spacing.",
+          "takeaways": [
+            "Two drills, one goal: arrive at launch in a better slot.",
+            "Drills should simplify the swing, not add moving parts.",
+            "Better launch position makes backspin feel effortless."
+          ]
+        },
+        {
+          "id": "A6R2yRQKGrQ",
+          "overview": "Get your eyes and body behind the ball before you hit it, and watch your ball flight and ability to drive every pitch location improve. The companion concept to the Behind The Ball breakdown.",
+          "takeaways": [
+            "Eyes behind the ball is as important as body behind it.",
+            "Being behind the ball works for every pitch location.",
+            "This one position improves flight, vision, and adjustability."
+          ]
+        },
+        {
+          "id": "Mp3PK_niX-c",
+          "overview": "How to control your cage effort level and train with deliberate focus so your practice swing and game swing become the same swing. Bruce Lee's 10,000-kicks principle applied to hitting.",
+          "takeaways": [
+            "Train at effort levels you can repeat in games.",
+            "Tension is a skill-killer — smooth beats hard in the cage.",
+            "One swing practiced 10,000 times beats 10,000 swings tried once."
+          ]
+        },
+        {
+          "id": "PtAn4ZerT8I",
+          "overview": "Your 'feel' and your 'real' are different — great hitters learn to connect them. Once you can blend what you feel with what's actually happening, hitting becomes the game within the game.",
+          "takeaways": [
+            "Feel isn't real — verify your swing on video.",
+            "The gap between feel and real is where fixes get lost.",
+            "Calibrate constantly: feel, film, compare, adjust."
+          ]
+        },
+        {
+          "id": "zPHsNj4QbrQ",
+          "overview": "Stop lunging and stop 'staying back' — both cues miss the point. Just get behind the ball: if you're behind it you can hit through it, and if you can hit through it you can drive it to all fields.",
+          "takeaways": [
+            "'Stay back' overcorrects into being stuck — get behind instead.",
+            "The forward move is good; uncontrolled forward is the problem.",
+            "Behind the ball → through the ball → power to all fields."
+          ]
+        },
+        {
+          "id": "mODzAE41EU8",
+          "overview": "A fast swing with no control is like a fast car with no brakes. Why over-rotating across the ball ruins fast swings, and how holding direction turns speed into actual in-game results.",
+          "takeaways": [
+            "Bat speed without direction control doesn't play in games.",
+            "Over-rotation across the ball is the fast-swing disease.",
+            "Train control at speed — holding direction is the skill."
+          ]
+        },
+        {
+          "id": "S2liVeew3CA",
+          "overview": "How to actually use water bags as a hitter: what they train (sequencing and ground force), why they work, and how they lead to more compression, higher exit velos, and simpler moves.",
+          "takeaways": [
+            "Water bags teach sequencing your body can't fake.",
+            "The shifting water punishes rushed, out-of-order moves.",
+            "Use them as a warm-up pattern trainer, not a gimmick."
+          ]
+        },
+        {
+          "id": "JyDBB8pT8WE",
+          "overview": "Bat speed, exit velo, and barrel accuracy at the same time — using SuperSpeed golf clubs to take the mind and body away from 'baseball swing' patterns. Baseball is golf; golf is baseball.",
+          "takeaways": [
+            "Overspeed golf work builds bat speed without swing anxiety.",
+            "A different implement frees the body to move athletically.",
+            "Speed gains transfer when the pattern stays around-the-body."
+          ]
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "name": "Translating Practice Into Games",
+      "videos": [
+        {
+          "id": "AQIjAmkjjPM",
+          "overview": "Narrow focus leads to big results. How to build a consistent in-game approach with less overthinking and a truly repeatable process — with stories and a connection to The Inner Game of Tennis.",
+          "takeaways": [
+            "A narrow, repeatable focus beats a head full of swing thoughts.",
+            "Build one approach you can run every at-bat, every game.",
+            "Trust the trained swing; the at-bat is for competing, not fixing."
+          ]
+        },
+        {
+          "id": "azYciNPUcz0",
+          "overview": "The simplified companion: small focus leads to big results. A tight, practical version of the in-game approach — what to actually think about (and not think about) in the box.",
+          "takeaways": [
+            "Shrink your focus to one small target per at-bat.",
+            "Simplicity under pressure is a competitive advantage.",
+            "Results follow process — pick the process before the pitch."
+          ]
+        },
+        {
+          "id": "7PRLOovPmfw",
+          "overview": "What an 'A swing' really is — and it's probably not what you think. Unlocking your best swing consistently in games is about taking what the game gives you, not forcing your cage swing onto every pitch.",
+          "takeaways": [
+            "The A swing is the right swing for the pitch, not your prettiest cut.",
+            "Take what the game gives you instead of forcing your plan.",
+            "Consistency comes from adaptability, not repetition of one swing."
+          ]
+        },
+        {
+          "id": "yK9al9Ah3HE",
+          "overview": "The fix for the most frustrating in-game miss: pull-side rollover groundballs. Bat path, approach, mindset, and drills to finally get your cage backspin to show up in live at-bats.",
+          "takeaways": [
+            "Rollovers are a path-plus-approach problem, not bad luck.",
+            "Fix the bat path first, then commit to an approach that protects it.",
+            "In-game backspin is the proof your cage work transferred."
+          ]
+        },
+        {
+          "id": "ov7wyXKrjKs",
+          "overview": "Winning against the elevated fastball is a non-negotiable in today's game. How to set up your swing to beat velocity at the top of the zone — and why solving that helps you hit everything else.",
+          "takeaways": [
+            "If you can't hit the fastball up, modern pitching will exploit it.",
+            "A short, direct path to the top of the zone covers everything below it.",
+            "Beating velo up top is a setup and path problem, not a reflex problem."
+          ]
+        },
+        {
+          "id": "GYuIRz88Y_s",
+          "overview": "51,597 MLB pitches came in at 98+ MPH — here's how hitters adapt, evolve, and succeed anyway. The practical adjustments that make elite velocity hittable.",
+          "takeaways": [
+            "Elite velo demands earlier decisions, not faster swings.",
+            "Simplify your move — every extra piece costs time you don't have.",
+            "Prepare for 98 in practice so 93 feels slow in games."
+          ]
+        },
+        {
+          "id": "m17Atc4UKn0",
+          "overview": "You are only as good as the pitches you swing at. An approach framework for better swing decisions that leads to more barrels, more walks, fewer strikeouts, and better power output.",
+          "takeaways": [
+            "Swing decisions cap your ceiling more than swing mechanics.",
+            "Hunt your pitch; take the pitcher's pitch.",
+            "Better selection = more barrels AND more walks — it compounds."
+          ]
+        },
+        {
+          "id": "REwrYLP0Ytk",
+          "overview": "Why your cage swings don't show up in games: you can't expect conviction in games if you never put yourself through the fire in training. Train dirty, play free.",
+          "takeaways": [
+            "You sink to your level of preparation — never rise to the occasion.",
+            "Add pressure, chaos, and consequences to training on purpose.",
+            "Game confidence is earned in uncomfortable practice reps."
+          ]
+        },
+        {
+          "id": "kH8paW9yhE0",
+          "overview": "The cage routine essentials for players climbing toward pro ball: a trustworthy routine that works under limited time and conditions, so you walk into game time confident anywhere.",
+          "takeaways": [
+            "Build a routine that works in any cage, any timeframe.",
+            "A trusted routine is portable confidence.",
+            "Learn this now — not the hard way in pro ball."
+          ]
+        },
+        {
+          "id": "rSzzSO8JpZQ",
+          "overview": "If you watch only one hitting video, Anderson says make it this one: the truth about the 'perfect' baseball swing, and why chasing perfection is the wrong target entirely.",
+          "takeaways": [
+            "There is no perfect swing — there's your best swing for this pitch.",
+            "Perfectionism in mechanics breeds paralysis in games.",
+            "Pursue mastery of adjustability, not a frozen ideal."
+          ]
+        },
+        {
+          "id": "O4gM1cVrGfs",
+          "overview": "The long-form breakdown of three things hurting your swing and ball flight — and the fixes for each. A consolidation video that ties together posture, path, and direction.",
+          "takeaways": [
+            "Three common culprits explain most bad ball flight.",
+            "Diagnose which of the three is yours before drilling.",
+            "Fix them in order — they stack on each other."
+          ]
+        },
+        {
+          "id": "beFr-dye7UY",
+          "overview": "The main reason hitters have bad swings — and it's not what you think. Good swings feel smooth and effortless; bad swings feel tense and rushed. Understanding why changes how you train.",
+          "takeaways": [
+            "Bad swings are usually rushed swings, not broken swings.",
+            "Smooth and under control is what elite effort feels like.",
+            "You can't rush greatness — tempo is controllable."
+          ]
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "name": "Mental Game & Long-Term Development",
+      "videos": [
+        {
+          "id": "migi_RAa6Vg",
+          "overview": "Seven daily disciplines that make in-game success feel effortless and build the consistency of a future big leaguer. The daily-habits backbone of the mental curriculum.",
+          "takeaways": [
+            "Consistency is built daily, in seven small controllable wins.",
+            "Discipline in boring areas creates freedom in games.",
+            "Track the wins — what gets counted gets done."
+          ]
+        },
+        {
+          "id": "sMxYWnmCci4",
+          "overview": "The full story of the worst slump of Anderson's life and how he climbed out. A true story with a transferable process, so you don't have to suffer through the same lessons.",
+          "takeaways": [
+            "Slumps are mental spirals — break the spiral, not the swing.",
+            "Return to process and presence when results disappear.",
+            "Every slump ends; how you behave inside it determines when."
+          ]
+        },
+        {
+          "id": "00niLJXr-bU",
+          "overview": "Losing confidence at the plate is the worst thing that can happen to a hitter — and it's in your control to get it back. The Presence Method approach to feeling free in the box again.",
+          "takeaways": [
+            "Confidence is controllable — nobody is coming to save you.",
+            "Presence beats anxiety: get out of the future, into the pitch.",
+            "Freedom at the plate is a practiced state, not a lucky streak."
+          ]
+        },
+        {
+          "id": "tArGi01N1CA",
+          "overview": "What if you stopped looking at your stats entirely? Why scoreboard-watching poisons your happiness, identity, and performance — and how focusing on process makes the numbers better anyway.",
+          "takeaways": [
+            "Stats obsession trades your identity for a spreadsheet.",
+            "The less you look at numbers, the better they get.",
+            "Judge your days by process quality, not box scores."
+          ]
+        },
+        {
+          "id": "xVebvk-Nep8",
+          "overview": "Kobe Bryant's Mamba Mentality translated for baseball: the five pillars, the obsessive work ethic, and the mental toughness techniques for slumps and pressure situations.",
+          "takeaways": [
+            "Obsess over the craft, not the outcome.",
+            "Five pillars: passion, obsession, resilience, fearlessness, detail.",
+            "Pressure is a privilege — train to want the big moment."
+          ]
+        },
+        {
+          "id": "CUKjk_WSctQ",
+          "overview": "How to get the most out of your winter: do less, but from a better position, then challenge it day by day. The off-season blueprint for showing up in spring a different hitter.",
+          "takeaways": [
+            "Off-season motto: do less, from a better position.",
+            "Build the position first, then progressively challenge it.",
+            "Winter is for skill-building; spring is for competing."
+          ]
+        },
+        {
+          "id": "ciSxbcanOss",
+          "overview": "The long-form recap on hitting the ball with backspin — with a philosophical edge: there is no one way, only whatever is required to beat the guy on the mound.",
+          "takeaways": [
+            "The more you know, the less you realize you know — stay a student.",
+            "There's no 'the way' — only what beats today's pitcher.",
+            "Principles over positions: backspin is the constant, the path varies."
+          ]
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "name": "Applied & Advanced Study",
+      "videos": [
+        {
+          "id": "ox5wulvUq5w",
+          "overview": "A full mic'd-up session with two D1 hitters preparing for the 2026 season: movement prep, routine work, then challenge work. Hear the exact cues, diagnostics, and coaching process in real time.",
+          "takeaways": [
+            "Real sessions flow: movement prep → routine work → challenge work.",
+            "Listen for how cues connect to the concepts from earlier phases.",
+            "Low effort and clear lanes to contact show up in every rep."
+          ]
+        },
+        {
+          "id": "CJRNr8f2NDo",
+          "overview": "Juan Soto's home run against Venezuela in the 2026 World Baseball Classic, broken down from both center-field and side angles. Watch the curriculum's concepts inside an elite swing.",
+          "takeaways": [
+            "Spot the setup checkpoints: posture, behind the ball, clean lane.",
+            "Elite swings look effortless because the positions do the work.",
+            "Use two angles — each reveals what the other hides."
+          ]
+        },
+        {
+          "id": "5nHXcuCoWaY",
+          "overview": "Fernando Tatis Jr.'s home run against Venezuela from the same WBC game, center-field and side angles. A different body type and style delivering the same non-negotiables.",
+          "takeaways": [
+            "Different styles, same principles — find the constants.",
+            "Compare with the Soto breakdown: what's identical, what's personal?",
+            "Graduation test: can you narrate the swing with what you've learned?"
+          ]
+        }
+      ]
+    }
+  ]
+}
