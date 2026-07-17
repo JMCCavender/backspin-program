@@ -7,17 +7,17 @@ import sys
 SCRATCH = pathlib.Path(__file__).parent
 OUT = SCRATCH.parent / "data.js"
 
-# Playlist display order: purpose-built series first, then core library,
-# how-tos, mental, misc, breakdowns.
+# Playlist display order: mental game first (per Jamie), then the
+# purpose-built series, core library, how-tos, misc, breakdowns.
 PLAYLIST_ORDER = [
+    ("PL-eXJm5v4ABZn0SE1IVRKRXFqcRDO7jLU", "Mental Skills",
+     "The inner game: confidence, slumps, routines, and lessons from 9 years in the minors."),
     ("PL-eXJm5v4ABYVTI9m3Y3CPPuqSEg4L5jd", "The Setup",
      "An 11-part, purpose-built series. Watch strictly in order — each part builds on the last."),
     ("PL-eXJm5v4ABY4pFs2-dmzgQzx3v7t_Gmn", "Backspin & Hitting",
      "The core library: why backspin is the #1 priority and how to build a swing that creates it."),
     ("PL-eXJm5v4ABZ2F8RbtkqLIUg4MDrl8ZJk", "How to Videos",
      "Practical fixes and how-tos — pull these in as specific problems show up in your swing."),
-    ("PL-eXJm5v4ABZn0SE1IVRKRXFqcRDO7jLU", "Mental Skills",
-     "The inner game: confidence, slumps, routines, and lessons from 9 years in the minors."),
     ("PL-eXJm5v4ABaEObU-UkQFu7-bIgTVvDnG", "Unfinished Player Development",
      "Odds and ends from the Unfinished PD program."),
     ("PL-eXJm5v4ABbxO8W9E2rroOvyvFjii2Cw", "Swing Breakdowns",

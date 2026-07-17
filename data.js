@@ -13,6 +13,25 @@ const DATA = {
   },
   "playlists": [
     {
+      "id": "PL-eXJm5v4ABZn0SE1IVRKRXFqcRDO7jLU",
+      "name": "Mental Skills",
+      "blurb": "The inner game: confidence, slumps, routines, and lessons from 9 years in the minors.",
+      "videos": [
+        "ZfE_8LGfCZg",
+        "REwrYLP0Ytk",
+        "beFr-dye7UY",
+        "migi_RAa6Vg",
+        "kH8paW9yhE0",
+        "sMxYWnmCci4",
+        "KASp0Jh7jb8",
+        "K66ppkU6V9g",
+        "ciSxbcanOss",
+        "xVebvk-Nep8",
+        "00niLJXr-bU",
+        "tArGi01N1CA"
+      ]
+    },
+    {
       "id": "PL-eXJm5v4ABYVTI9m3Y3CPPuqSEg4L5jd",
       "name": "The Setup",
       "blurb": "An 11-part, purpose-built series. Watch strictly in order — each part builds on the last.",
@@ -101,25 +120,6 @@ const DATA = {
       ]
     },
     {
-      "id": "PL-eXJm5v4ABZn0SE1IVRKRXFqcRDO7jLU",
-      "name": "Mental Skills",
-      "blurb": "The inner game: confidence, slumps, routines, and lessons from 9 years in the minors.",
-      "videos": [
-        "ZfE_8LGfCZg",
-        "REwrYLP0Ytk",
-        "beFr-dye7UY",
-        "migi_RAa6Vg",
-        "kH8paW9yhE0",
-        "sMxYWnmCci4",
-        "KASp0Jh7jb8",
-        "K66ppkU6V9g",
-        "ciSxbcanOss",
-        "xVebvk-Nep8",
-        "00niLJXr-bU",
-        "tArGi01N1CA"
-      ]
-    },
-    {
       "id": "PL-eXJm5v4ABaEObU-UkQFu7-bIgTVvDnG",
       "name": "Unfinished Player Development",
       "blurb": "Odds and ends from the Unfinished PD program.",
@@ -140,6 +140,162 @@ const DATA = {
     }
   ],
   "videos": {
+    "ZfE_8LGfCZg": {
+      "id": "ZfE_8LGfCZg",
+      "title": "How to Save Your Baseball Career Before It's Dead (Free Game from 9 year minor leaguer)",
+      "duration": 935,
+      "phase": 0,
+      "seq": 1,
+      "overview": "Anderson's foundational talk from 9 years in the minors: your career has an expiration date, and accepting that is what sets you free to play without fear. This frames the mental ownership that everything else in the curriculum builds on.",
+      "takeaways": [
+        "Your career will end — accepting that removes the fear that ruins at-bats.",
+        "Nobody is coming to save you; take ownership of your mental game now.",
+        "Start from knowing things can go wrong, not hoping they won't."
+      ]
+    },
+    "REwrYLP0Ytk": {
+      "id": "REwrYLP0Ytk",
+      "title": "Why Your Cage Swings Don’t Show Up in Games",
+      "duration": 287,
+      "phase": 4,
+      "seq": 53,
+      "overview": "Why your cage swings don't show up in games: you can't expect conviction in games if you never put yourself through the fire in training. Train dirty, play free.",
+      "takeaways": [
+        "You sink to your level of preparation — never rise to the occasion.",
+        "Add pressure, chaos, and consequences to training on purpose.",
+        "Game confidence is earned in uncomfortable practice reps."
+      ]
+    },
+    "beFr-dye7UY": {
+      "id": "beFr-dye7UY",
+      "title": "The Difference Between Your Good & Bad Swings (explained)",
+      "duration": 295,
+      "phase": 4,
+      "seq": 57,
+      "overview": "The main reason hitters have bad swings — and it's not what you think. Good swings feel smooth and effortless; bad swings feel tense and rushed. Understanding why changes how you train.",
+      "takeaways": [
+        "Bad swings are usually rushed swings, not broken swings.",
+        "Smooth and under control is what elite effort feels like.",
+        "You can't rush greatness — tempo is controllable."
+      ]
+    },
+    "migi_RAa6Vg": {
+      "id": "migi_RAa6Vg",
+      "title": "7 Daily Wins to Become a Consistent MLB Player",
+      "duration": 501,
+      "phase": 5,
+      "seq": 58,
+      "overview": "Seven daily disciplines that make in-game success feel effortless and build the consistency of a future big leaguer. The daily-habits backbone of the mental curriculum.",
+      "takeaways": [
+        "Consistency is built daily, in seven small controllable wins.",
+        "Discipline in boring areas creates freedom in games.",
+        "Track the wins — what gets counted gets done."
+      ]
+    },
+    "kH8paW9yhE0": {
+      "id": "kH8paW9yhE0",
+      "title": "Cage Work Routine: Key Essentials for Aspiring MLB Players",
+      "duration": 317,
+      "phase": 4,
+      "seq": 54,
+      "overview": "The cage routine essentials for players climbing toward pro ball: a trustworthy routine that works under limited time and conditions, so you walk into game time confident anywhere.",
+      "takeaways": [
+        "Build a routine that works in any cage, any timeframe.",
+        "A trusted routine is portable confidence.",
+        "Learn this now — not the hard way in pro ball."
+      ]
+    },
+    "sMxYWnmCci4": {
+      "id": "sMxYWnmCci4",
+      "title": "How to Get Out of a Hitting Slump (Based on a True Story)",
+      "duration": 832,
+      "phase": 5,
+      "seq": 59,
+      "overview": "The full story of the worst slump of Anderson's life and how he climbed out. A true story with a transferable process, so you don't have to suffer through the same lessons.",
+      "takeaways": [
+        "Slumps are mental spirals — break the spiral, not the swing.",
+        "Return to process and presence when results disappear.",
+        "Every slump ends; how you behave inside it determines when."
+      ]
+    },
+    "KASp0Jh7jb8": {
+      "id": "KASp0Jh7jb8",
+      "title": "3 Life Lessons From 9 Years of Minor League Baseball (learn from me)",
+      "duration": 418,
+      "phase": 0,
+      "seq": 2,
+      "overview": "Three hard-earned lessons from nearly a decade of minor-league baseball — the strikeouts, setbacks, and small wins that kept the dream alive. Real talk about the journey before you dive into mechanics.",
+      "takeaways": [
+        "The grind outlasts talent — how you handle setbacks defines your ceiling.",
+        "Small victories compound; look for them when the dream feels distant.",
+        "Learn from someone else's 9 years so you don't repeat the same mistakes."
+      ]
+    },
+    "K66ppkU6V9g": {
+      "id": "K66ppkU6V9g",
+      "title": "How to Improve Your In-Game Mindset",
+      "duration": 373,
+      "phase": 0,
+      "seq": 3,
+      "overview": "The mindset shift that flips the power dynamic of every at-bat: the pitcher has to get YOU out. A short reminder of who's actually in charge at the plate.",
+      "takeaways": [
+        "The pitcher is the one under pressure — he has to get you out.",
+        "Walk into the box with the mentality of the attacker, not the defender.",
+        "Confidence is a decision you make before the at-bat, not a result of it."
+      ]
+    },
+    "ciSxbcanOss": {
+      "id": "ciSxbcanOss",
+      "title": "How to Hit The Ball with Backspin",
+      "duration": 930,
+      "phase": 5,
+      "seq": 64,
+      "overview": "The long-form recap on hitting the ball with backspin — with a philosophical edge: there is no one way, only whatever is required to beat the guy on the mound.",
+      "takeaways": [
+        "The more you know, the less you realize you know — stay a student.",
+        "There's no 'the way' — only what beats today's pitcher.",
+        "Principles over positions: backspin is the constant, the path varies."
+      ]
+    },
+    "xVebvk-Nep8": {
+      "id": "xVebvk-Nep8",
+      "title": "How The Mamba Mentality Can Change Your Baseball Career",
+      "duration": 849,
+      "phase": 5,
+      "seq": 62,
+      "overview": "Kobe Bryant's Mamba Mentality translated for baseball: the five pillars, the obsessive work ethic, and the mental toughness techniques for slumps and pressure situations.",
+      "takeaways": [
+        "Obsess over the craft, not the outcome.",
+        "Five pillars: passion, obsession, resilience, fearlessness, detail.",
+        "Pressure is a privilege — train to want the big moment."
+      ]
+    },
+    "00niLJXr-bU": {
+      "id": "00niLJXr-bU",
+      "title": "How to Get Your Confidence Back at The Plate",
+      "duration": 407,
+      "phase": 5,
+      "seq": 60,
+      "overview": "Losing confidence at the plate is the worst thing that can happen to a hitter — and it's in your control to get it back. The Presence Method approach to feeling free in the box again.",
+      "takeaways": [
+        "Confidence is controllable — nobody is coming to save you.",
+        "Presence beats anxiety: get out of the future, into the pitch.",
+        "Freedom at the plate is a practiced state, not a lucky streak."
+      ]
+    },
+    "tArGi01N1CA": {
+      "id": "tArGi01N1CA",
+      "title": "Your Stats Are Poison (Stop Looking)",
+      "duration": 1097,
+      "phase": 5,
+      "seq": 61,
+      "overview": "What if you stopped looking at your stats entirely? Why scoreboard-watching poisons your happiness, identity, and performance — and how focusing on process makes the numbers better anyway.",
+      "takeaways": [
+        "Stats obsession trades your identity for a spreadsheet.",
+        "The less you look at numbers, the better they get.",
+        "Judge your days by process quality, not box scores."
+      ]
+    },
     "kiUMz_HTyFw": {
       "id": "kiUMz_HTyFw",
       "title": "The Setup: Introduction",
@@ -804,19 +960,6 @@ const DATA = {
         "Results follow process — pick the process before the pitch."
       ]
     },
-    "K66ppkU6V9g": {
-      "id": "K66ppkU6V9g",
-      "title": "How to Improve Your In-Game Mindset",
-      "duration": 373,
-      "phase": 0,
-      "seq": 3,
-      "overview": "The mindset shift that flips the power dynamic of every at-bat: the pitcher has to get YOU out. A short reminder of who's actually in charge at the plate.",
-      "takeaways": [
-        "The pitcher is the one under pressure — he has to get you out.",
-        "Walk into the box with the mentality of the attacker, not the defender.",
-        "Confidence is a decision you make before the at-bat, not a result of it."
-      ]
-    },
     "uVl-CuijK7M": {
       "id": "uVl-CuijK7M",
       "title": "Stop Fixing Your Swing Path. Fix Your Spacing",
@@ -828,149 +971,6 @@ const DATA = {
         "Path problems are usually spacing problems upstream.",
         "Create space away from you and behind you before contact.",
         "Fix the frame (spacing) and the picture (path) fixes itself."
-      ]
-    },
-    "ZfE_8LGfCZg": {
-      "id": "ZfE_8LGfCZg",
-      "title": "How to Save Your Baseball Career Before It's Dead (Free Game from 9 year minor leaguer)",
-      "duration": 935,
-      "phase": 0,
-      "seq": 1,
-      "overview": "Anderson's foundational talk from 9 years in the minors: your career has an expiration date, and accepting that is what sets you free to play without fear. This frames the mental ownership that everything else in the curriculum builds on.",
-      "takeaways": [
-        "Your career will end — accepting that removes the fear that ruins at-bats.",
-        "Nobody is coming to save you; take ownership of your mental game now.",
-        "Start from knowing things can go wrong, not hoping they won't."
-      ]
-    },
-    "REwrYLP0Ytk": {
-      "id": "REwrYLP0Ytk",
-      "title": "Why Your Cage Swings Don’t Show Up in Games",
-      "duration": 287,
-      "phase": 4,
-      "seq": 53,
-      "overview": "Why your cage swings don't show up in games: you can't expect conviction in games if you never put yourself through the fire in training. Train dirty, play free.",
-      "takeaways": [
-        "You sink to your level of preparation — never rise to the occasion.",
-        "Add pressure, chaos, and consequences to training on purpose.",
-        "Game confidence is earned in uncomfortable practice reps."
-      ]
-    },
-    "beFr-dye7UY": {
-      "id": "beFr-dye7UY",
-      "title": "The Difference Between Your Good & Bad Swings (explained)",
-      "duration": 295,
-      "phase": 4,
-      "seq": 57,
-      "overview": "The main reason hitters have bad swings — and it's not what you think. Good swings feel smooth and effortless; bad swings feel tense and rushed. Understanding why changes how you train.",
-      "takeaways": [
-        "Bad swings are usually rushed swings, not broken swings.",
-        "Smooth and under control is what elite effort feels like.",
-        "You can't rush greatness — tempo is controllable."
-      ]
-    },
-    "migi_RAa6Vg": {
-      "id": "migi_RAa6Vg",
-      "title": "7 Daily Wins to Become a Consistent MLB Player",
-      "duration": 501,
-      "phase": 5,
-      "seq": 58,
-      "overview": "Seven daily disciplines that make in-game success feel effortless and build the consistency of a future big leaguer. The daily-habits backbone of the mental curriculum.",
-      "takeaways": [
-        "Consistency is built daily, in seven small controllable wins.",
-        "Discipline in boring areas creates freedom in games.",
-        "Track the wins — what gets counted gets done."
-      ]
-    },
-    "kH8paW9yhE0": {
-      "id": "kH8paW9yhE0",
-      "title": "Cage Work Routine: Key Essentials for Aspiring MLB Players",
-      "duration": 317,
-      "phase": 4,
-      "seq": 54,
-      "overview": "The cage routine essentials for players climbing toward pro ball: a trustworthy routine that works under limited time and conditions, so you walk into game time confident anywhere.",
-      "takeaways": [
-        "Build a routine that works in any cage, any timeframe.",
-        "A trusted routine is portable confidence.",
-        "Learn this now — not the hard way in pro ball."
-      ]
-    },
-    "sMxYWnmCci4": {
-      "id": "sMxYWnmCci4",
-      "title": "How to Get Out of a Hitting Slump (Based on a True Story)",
-      "duration": 832,
-      "phase": 5,
-      "seq": 59,
-      "overview": "The full story of the worst slump of Anderson's life and how he climbed out. A true story with a transferable process, so you don't have to suffer through the same lessons.",
-      "takeaways": [
-        "Slumps are mental spirals — break the spiral, not the swing.",
-        "Return to process and presence when results disappear.",
-        "Every slump ends; how you behave inside it determines when."
-      ]
-    },
-    "KASp0Jh7jb8": {
-      "id": "KASp0Jh7jb8",
-      "title": "3 Life Lessons From 9 Years of Minor League Baseball (learn from me)",
-      "duration": 418,
-      "phase": 0,
-      "seq": 2,
-      "overview": "Three hard-earned lessons from nearly a decade of minor-league baseball — the strikeouts, setbacks, and small wins that kept the dream alive. Real talk about the journey before you dive into mechanics.",
-      "takeaways": [
-        "The grind outlasts talent — how you handle setbacks defines your ceiling.",
-        "Small victories compound; look for them when the dream feels distant.",
-        "Learn from someone else's 9 years so you don't repeat the same mistakes."
-      ]
-    },
-    "ciSxbcanOss": {
-      "id": "ciSxbcanOss",
-      "title": "How to Hit The Ball with Backspin",
-      "duration": 930,
-      "phase": 5,
-      "seq": 64,
-      "overview": "The long-form recap on hitting the ball with backspin — with a philosophical edge: there is no one way, only whatever is required to beat the guy on the mound.",
-      "takeaways": [
-        "The more you know, the less you realize you know — stay a student.",
-        "There's no 'the way' — only what beats today's pitcher.",
-        "Principles over positions: backspin is the constant, the path varies."
-      ]
-    },
-    "xVebvk-Nep8": {
-      "id": "xVebvk-Nep8",
-      "title": "How The Mamba Mentality Can Change Your Baseball Career",
-      "duration": 849,
-      "phase": 5,
-      "seq": 62,
-      "overview": "Kobe Bryant's Mamba Mentality translated for baseball: the five pillars, the obsessive work ethic, and the mental toughness techniques for slumps and pressure situations.",
-      "takeaways": [
-        "Obsess over the craft, not the outcome.",
-        "Five pillars: passion, obsession, resilience, fearlessness, detail.",
-        "Pressure is a privilege — train to want the big moment."
-      ]
-    },
-    "00niLJXr-bU": {
-      "id": "00niLJXr-bU",
-      "title": "How to Get Your Confidence Back at The Plate",
-      "duration": 407,
-      "phase": 5,
-      "seq": 60,
-      "overview": "Losing confidence at the plate is the worst thing that can happen to a hitter — and it's in your control to get it back. The Presence Method approach to feeling free in the box again.",
-      "takeaways": [
-        "Confidence is controllable — nobody is coming to save you.",
-        "Presence beats anxiety: get out of the future, into the pitch.",
-        "Freedom at the plate is a practiced state, not a lucky streak."
-      ]
-    },
-    "tArGi01N1CA": {
-      "id": "tArGi01N1CA",
-      "title": "Your Stats Are Poison (Stop Looking)",
-      "duration": 1097,
-      "phase": 5,
-      "seq": 61,
-      "overview": "What if you stopped looking at your stats entirely? Why scoreboard-watching poisons your happiness, identity, and performance — and how focusing on process makes the numbers better anyway.",
-      "takeaways": [
-        "Stats obsession trades your identity for a spreadsheet.",
-        "The less you look at numbers, the better they get.",
-        "Judge your days by process quality, not box scores."
       ]
     },
     "JyDBB8pT8WE": {
