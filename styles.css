@@ -57,9 +57,150 @@ a { color: var(--amber); }
   color: var(--chalk-dim);
 }
 
+/* ── Auth gate ────────────────────────────────────────────────────────── */
+
+#auth-gate {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 32px 0;
+}
+
+#auth-gate[hidden], #app-shell[hidden] { display: none; }
+
+.gate-brand { text-align: center; }
+
+.gate-brand h1 {
+  font-family: "Graduate", serif;
+  font-size: clamp(30px, 8vw, 44px);
+  line-height: 1.05;
+  margin-top: 8px;
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35);
+}
+
+/* ── User strip / sync badge / coach view ─────────────────────────────── */
+
+.user-strip {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-height: 32px;
+  margin-bottom: 6px;
+}
+
+.user-name {
+  font-family: "Oswald", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--chalk-dim);
+}
+
+.sync-badge {
+  font-family: "Oswald", sans-serif;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--grass);
+  margin-right: auto;
+}
+
+.sync-badge.offline { color: var(--clay); }
+
+.coach-btn {
+  font-family: "Oswald", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--amber);
+  border: 1.5px solid var(--amber);
+  border-radius: 6px;
+  padding: 5px 10px;
+}
+
+#coach-view {
+  background: var(--panel);
+  border: 1px solid var(--amber);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 20px;
+}
+
+.coach-title {
+  font-family: "Graduate", serif;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.coach-note { font-size: 13px; color: var(--chalk-dim); }
+
+.roster-card {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.roster-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.roster-name { font-weight: 600; font-size: 14px; }
+
+.roster-user {
+  font-family: "Oswald", sans-serif;
+  font-size: 11.5px;
+  color: var(--chalk-dim);
+}
+
+.roster-stat {
+  margin-left: auto;
+  font-family: "Oswald", sans-serif;
+  font-size: 13px;
+  color: var(--amber);
+  font-variant-numeric: tabular-nums;
+}
+
+.roster-overall { margin-bottom: 10px; }
+
+.roster-playlists {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px 12px;
+}
+
+.roster-pl-name {
+  display: block;
+  font-family: "Oswald", sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--chalk-dim);
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.roster-pl .chalkbar { height: 4px; }
+
+.roster-meta {
+  font-size: 11.5px;
+  color: var(--chalk-dim);
+  margin-top: 10px;
+}
+
 /* ── Masthead ─────────────────────────────────────────────────────────── */
 
-.masthead { padding: 28px 0 18px; }
+.masthead { padding: 16px 0 18px; }
 
 .masthead h1 {
   font-family: "Graduate", serif;

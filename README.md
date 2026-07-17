@@ -3,24 +3,55 @@
 Mobile-optimized web app for working through Anderson Miller's (Unfinished
 Player Development) YouTube hitting curriculum — 67 unique videos across 6
 playlists, with watch tracking, per-video overviews and key takeaways, and
-progress bars per playlist plus overall.
+progress bars per playlist plus overall. Multi-user: Clerk username/password
+sign-in, per-user cloud progress, and a coach (admin) view of the whole
+roster.
 
+**Live:** https://backspin-program.vercel.app
 **Channel:** https://www.youtube.com/@andersonLmiller
 
-## Run it
+## Auth & multi-user architecture
 
-No build step, no dependencies. Any static server works:
+- **Sign-in**: Clerk (`backspin-program` app, Development instance),
+  username + password only, restricted mode — users are created by the coach
+  in the [Clerk dashboard](https://dashboard.clerk.com) (Users → Create
+  user); there is no public sign-up.
+- **Per-user progress**: synced (debounced 2.5s) to the signed-in user's
+  Clerk `unsafeMetadata.progress` — users can only write their own.
+  localStorage remains the offline cache; cloud and local merge on load
+  (watched = union, positions = newest wins).
+- **Coach view**: users with `publicMetadata.role === "admin"` get a
+  "Coach view" button that calls `GET /api/roster` — a Vercel serverless
+  function ([api/roster.js](api/roster.js)) that verifies the Clerk JWT,
+  checks the admin role, and returns every user's progress. The admin role
+  can only be set server-side: `./scripts/grant_admin.sh <username>`.
+- **Secrets**: the Clerk secret key lives in Vercel env
+  (`CLERK_SECRET_KEY`, production + preview) and locally at
+  `~/.secrets/backspin-clerk-sk` (0600). Never in the repo. The publishable
+  key in index.html is public by design.
+
+## Run & deploy
+
+Local (static parts only — `/api/roster` 404s locally):
 
 ```bash
-python3 -m http.server 8371 --directory .
-# then open http://localhost:8371 (or your Mac's LAN IP from a phone)
+python3 -m http.server 8371 --directory .   # or .claude/launch.json → backspin-program
 ```
 
-Or via Claude Code's preview: the launch config is in `.claude/launch.json`
-(`backspin-program`).
+Deploy (Vercel CLI, project `backspin-program`):
 
-To use it on a phone away from home, host the folder anywhere static
-(GitHub Pages, Netlify drop, Vercel) — there is no backend.
+```bash
+vercel deploy --prod --yes
+```
+
+The GitHub repo (JMCCavender/backspin-program) is the source of truth; the
+old GitHub Pages URL still serves the static app but has no roster API.
+
+### Adding players
+
+1. Clerk dashboard → backspin-program → Users → Create user
+   (username + password; share credentials with the player).
+2. Optionally `./scripts/grant_admin.sh <username>` to make them a coach.
 
 ## How it works
 

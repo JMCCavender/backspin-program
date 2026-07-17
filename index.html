@@ -12,14 +12,42 @@
 <link href="https://fonts.googleapis.com/css2?family=Graduate&family=Oswald:wght@400;500;600&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230C1F14'/><path d='M50 16 84 50 50 84 16 50Z' fill='%23F6B93B'/></svg>">
+<script
+  async
+  crossorigin="anonymous"
+  data-clerk-publishable-key="pk_test_c2V0dGxpbmctcmF0dGxlci04OC5jbGVyay5hY2NvdW50cy5kZXYk"
+  src="https://settling-rattler-88.clerk.accounts.dev/npm/@clerk/clerk-js@5/dist/clerk.browser.js"
+  type="text/javascript"
+></script>
 </head>
 <body>
 
+<div id="auth-gate" hidden>
+  <div class="gate-brand">
+    <p class="eyebrow">Anderson Miller · Unfinished Player Development</p>
+    <h1>The Backspin<br>Program</h1>
+  </div>
+  <div id="sign-in"></div>
+</div>
+
+<div id="app-shell" hidden>
+
 <header class="masthead">
+  <div class="user-strip">
+    <span id="sync-badge" class="sync-badge"></span>
+    <span id="user-name" class="user-name"></span>
+    <button id="coach-btn" class="coach-btn" hidden>Coach view</button>
+    <div id="user-button"></div>
+  </div>
   <p class="eyebrow">Anderson Miller · Unfinished Player Development</p>
   <h1>The Backspin<br>Program</h1>
   <p class="masthead-sub">67 videos · 6 playlists · one swing</p>
 </header>
+
+<section id="coach-view" hidden aria-label="Coach view">
+  <h2 class="coach-title">Roster progress</h2>
+  <div id="coach-body"></div>
+</section>
 
 <section class="scoreboard" aria-label="Overall progress">
   <div class="scoreboard-row">
@@ -42,7 +70,10 @@
   <button class="reset-btn" id="reset-btn">Reset all progress</button>
 </footer>
 
+</div><!-- /app-shell -->
+
 <script src="data.js"></script>
 <script src="app.js"></script>
+<script src="auth.js"></script>
 </body>
 </html>

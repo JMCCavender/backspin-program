@@ -1,0 +1,10 @@
+{
+  "name": "backspin-program",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "The Backspin Program — Anderson Miller curriculum tracker (static app + Clerk auth + Vercel roster API)",
+  "dependencies": {
+    "@clerk/backend": "^2"
+  }
+}

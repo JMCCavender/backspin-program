@@ -33,3 +33,18 @@ See README.md for the full architecture and refresh workflow.
   `kiUMz_HTyFw`). The app also handles unknown ones at runtime via `onError`,
   but add newly discovered ones to `NO_EMBED` for a better first tap.
 - Preview server: `.claude/launch.json` → `backspin-program` (port 8371).
+- **Auth**: Clerk app `backspin-program` (dev instance
+  `settling-rattler-88.clerk.accounts.dev`), username+password, restricted
+  sign-ups. Secret key: Vercel env `CLERK_SECRET_KEY` +
+  `~/.secrets/backspin-clerk-sk` locally — never commit it, never print it.
+- **Deploys go to Vercel** (`vercel deploy --prod --yes`, project
+  `backspin-program`) — GitHub Pages still serves the static app but lacks
+  `/api/roster`, so the coach view only works on the Vercel URL.
+- `initApp()` (app.js) is only called by auth.js after sign-in + cloud
+  merge; don't reintroduce an auto-run at the bottom of app.js.
+- Progress pushed to Clerk unsafeMetadata is TRIMMED (`trimmedPositions()` in
+  auth.js): unwatched-only, rounded seconds — Clerk metadata has an 8KB
+  cap. Don't sync raw `state.positions`.
+- Admin role lives in `publicMetadata.role` (server-set only, via
+  `scripts/grant_admin.sh`). `unsafeMetadata` is client-writable — never put
+  authorization data there.

@@ -26,10 +26,12 @@ const state = {
 
 function saveWatched() {
   localStorage.setItem(STORE_KEY, JSON.stringify(state.watched));
+  if (typeof scheduleCloudSync === "function") scheduleCloudSync();
 }
 
 function savePositions() {
   localStorage.setItem(POS_KEY, JSON.stringify(state.positions));
+  if (typeof scheduleCloudSync === "function") scheduleCloudSync();
 }
 
 function isWatched(id) {
@@ -510,5 +512,11 @@ function openFirstIncomplete() {
   if (pl) togglePlaylistDom(pl.id, true);
 }
 
-render();
-openFirstIncomplete();
+// Called by auth.js once the user is signed in and cloud progress is merged.
+// eslint-disable-next-line no-unused-vars
+function initApp() {
+  state.watched = loadJson(STORE_KEY);
+  state.positions = loadJson(POS_KEY);
+  render();
+  openFirstIncomplete();
+}
