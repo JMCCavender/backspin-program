@@ -18,6 +18,18 @@ See README.md for the full architecture and refresh workflow.
   itself; within-playlist dedupe in the generator handles it.
 - All strings rendered via `innerHTML` in `app.js` must pass through `esc()`.
   Data is locally generated (no user input), but keep the habit.
-- localStorage key is versioned (`backspin-program-watched-v1`); if the
-  stored shape ever changes, bump the version rather than migrating in place.
+- localStorage keys are versioned (`backspin-program-watched-v1`,
+  `backspin-program-positions-v1`); if a stored shape ever changes, bump the
+  version rather than migrating in place.
+- **Never call full `render()` after page load** — it destroys an active
+  embedded YouTube player. All post-load updates go through the surgical
+  helpers in app.js (`updateWatchedUI`, `updateLiveProgress`,
+  `togglePlaylistDom`, `toggleVideoDom`). Full render is init/reset-only.
+- `playInline` claims `player.key` *before* awaiting the IFrame API and every
+  async continuation re-checks it — that guard prevents a double-tap race
+  that orphans players. Keep it.
+- Embed-disabled videos (YouTube error 150/101) are flagged `noEmbed` in
+  `data.js` via the `NO_EMBED` set in `scripts/gen_data.py` (currently just
+  `kiUMz_HTyFw`). The app also handles unknown ones at runtime via `onError`,
+  but add newly discovered ones to `NO_EMBED` for a better first tap.
 - Preview server: `.claude/launch.json` → `backspin-program` (port 8371).

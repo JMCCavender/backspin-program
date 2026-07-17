@@ -144,6 +144,7 @@ const DATA = {
       "id": "kiUMz_HTyFw",
       "title": "The Setup: Introduction",
       "duration": 84,
+      "noEmbed": true,
       "phase": 1,
       "seq": 4,
       "overview": "The 90-second introduction to the 11-part Setup series — a step-by-step breakdown of every part of the stance that leads to an efficient, effortless swing. Watch this to understand why the series is sequenced the way it is.",

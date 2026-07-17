@@ -332,12 +332,92 @@ a { color: var(--amber); }
 .video-caret { color: var(--chalk-dim); font-size: 11px; transition: transform 0.25s ease; }
 .video-row[aria-expanded="true"] .video-caret { transform: rotate(180deg); }
 
+/* per-video playback progress (live while the embedded player runs) */
+.vprogress {
+  display: block;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 2px;
+  margin-top: 7px;
+  overflow: hidden;
+}
+
+.vprogress[hidden] { display: none; }
+
+.vprogress-fill {
+  display: block;
+  height: 100%;
+  background: var(--amber);
+  border-radius: 2px;
+  transition: width 0.4s linear;
+}
+
 /* ── Video detail ─────────────────────────────────────────────────────── */
 
 .video-detail { padding: 2px 14px 16px; background: var(--panel-2); }
 .video-detail[hidden] { display: none; }
 
-.video-detail .thumb-link { display: block; margin: 10px 0 12px; position: relative; }
+.player-shell { margin: 10px 0 12px; }
+
+.thumb-btn {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding: 0;
+}
+
+.player-frame,
+.player-frame iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: 8px;
+  display: block;
+  background: #000;
+}
+
+.resume-chip {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  background: rgba(12, 31, 20, 0.88);
+  color: var(--chalk);
+  font-family: "Oswald", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+}
+
+.live-strip {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 8px;
+  font-family: "Oswald", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--chalk-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--clay);
+  animation: live-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.embed-note { font-size: 12.5px; color: var(--chalk-dim); margin-top: 8px; }
 
 .video-detail .thumb {
   width: 100%;

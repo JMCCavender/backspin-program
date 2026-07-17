@@ -35,10 +35,21 @@ To use it on a phone away from home, host the folder anywhere static
   phased sequence (Orientation → The Setup → Backspin Fundamentals →
   Troubleshooting → In-Game Transfer → Mental Game → Applied Study). Every
   video row carries a `P0`–`P6` phase chip tying it back to that sequence.
-- **Tracking** lives in `localStorage` (key `backspin-program-watched-v1`),
-  per browser/device. "Reset all progress" in the footer clears it.
-- **Watch links** open YouTube with the playlist context
-  (`watch?v=…&list=…`) so the video opens inside its playlist in the app.
+- **Embedded playback**: tapping a video's thumbnail in the detail view
+  swaps in a YouTube player (IFrame API, privacy-enhanced
+  `youtube-nocookie.com` host). While it plays, a live strip shows
+  `current / total · %`, and a thin amber bar on the video's row fills in
+  real time. Playback position is saved every second, so a reopened video
+  shows a "Resume m:ss" chip and starts where you left off. Reaching 90%
+  (or the end) auto-marks the video watched — the manual diamond toggle
+  still works for overrides.
+- **Tracking** lives in `localStorage` (keys `backspin-program-watched-v1`
+  and `backspin-program-positions-v1`), per browser/device. "Reset all
+  progress" in the footer clears both.
+- **"Open in YouTube" links** carry the playlist context (`watch?v=…&list=…`)
+  so the video opens inside its playlist in the YouTube app. One video
+  ("The Setup: Introduction") has embedding disabled by the channel and
+  always opens on YouTube directly.
 
 ## Files
 

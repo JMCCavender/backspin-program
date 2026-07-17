@@ -24,6 +24,11 @@ PLAYLIST_ORDER = [
      "Elite swings under the microscope — watch these last and test your eye."),
 ]
 
+# Videos whose owner disabled embedded playback (YouTube error 150/101).
+# Found by probing all 67 with the IFrame API on 2026-07-17; the app shows a
+# direct YouTube link for these instead of an inline player.
+NO_EMBED = {"kiUMz_HTyFw"}
+
 PHASE_NAMES = {
     0: "Orientation",
     1: "The Setup",
@@ -70,6 +75,8 @@ for pl_id, pl_name, pl_blurb in PLAYLIST_ORDER:
                 "title": e["title"],
                 "duration": int(e["duration"] or 0),
             }
+            if vid in NO_EMBED:
+                videos[vid]["noEmbed"] = True
     playlists.append({"id": pl_id, "name": pl_name, "blurb": pl_blurb, "videos": vid_ids})
 
 # Validate: curated and scraped sets must match exactly.
