@@ -649,6 +649,9 @@ a { color: var(--amber); }
 .btn-mark { border: 1.5px solid var(--chalk-dim); color: var(--chalk); }
 .video.watched .btn-mark { border-color: var(--grass); color: var(--grass); }
 
+.yt-link { text-align: center; margin-top: 10px; font-size: 12px; }
+.yt-link a { color: var(--chalk-dim); }
+
 /* ── Footer ───────────────────────────────────────────────────────────── */
 
 .footer {

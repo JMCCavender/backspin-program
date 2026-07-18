@@ -169,7 +169,7 @@ function renderUpNext() {
         <span class="upnext-meta">${fmtDuration(next.duration)}</span>
       </span>
     </button>`;
-  el("#upnext-card").addEventListener("click", () => jumpToVideo(next.id));
+  el("#upnext-card").addEventListener("click", () => jumpToVideo(next.id, true));
 }
 
 // The player shell shows the thumbnail until tapped, then swaps in the
@@ -225,9 +225,12 @@ function videoRowHtml(pl, vid) {
       <ul class="takeaways">${v.takeaways.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
       ${others.length ? `<p class="also-in">Also appears in: ${others.map(esc).join(", ")} — watching it once counts everywhere.</p>` : ""}
       <div class="detail-actions">
-        <a class="btn btn-watch" href="${watchUrl(vid, pl.id)}" target="_blank" rel="noopener">Open in YouTube</a>
+        ${v.noEmbed
+          ? `<a class="btn btn-watch" href="${watchUrl(vid, pl.id)}" target="_blank" rel="noopener">Watch on YouTube</a>`
+          : `<button class="btn btn-watch" data-play="${key}">▶ Play here</button>`}
         <button class="btn btn-mark" data-mark="${vid}">${watched ? "Watched ✓" : "Mark watched"}</button>
       </div>
+      ${v.noEmbed ? "" : `<p class="yt-link"><a href="${watchUrl(vid, pl.id)}" target="_blank" rel="noopener">Open in YouTube ↗</a></p>`}
     </div>
   </div>`;
 }
@@ -374,12 +377,14 @@ function updateLiveProgress(vid) {
 }
 
 // Expand the playlist containing a video, open its detail, scroll to it.
-function jumpToVideo(vid) {
+// With autoplay, start the inline player too (skipped for noEmbed videos).
+function jumpToVideo(vid, autoplay = false) {
   const pl = DATA.playlists.find((p) => p.videos.includes(vid));
   togglePlaylistDom(pl.id, true);
   toggleVideoDom(`${pl.id}:${vid}`, true);
   document.querySelector(`.playlist[data-playlist="${pl.id}"] [data-video="${vid}"]`)
     ?.scrollIntoView({ behavior: "smooth", block: "center" });
+  if (autoplay && !DATA.videos[vid].noEmbed) playInline(`${pl.id}:${vid}`);
 }
 
 // ── Embedded YouTube player ──────────────────────────────────────────────
