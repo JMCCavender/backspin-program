@@ -197,6 +197,33 @@ function shellThumbHtml(vid, key) {
     </button>`;
 }
 
+// Post-watch "carry forward" recap: detailed lessons with tap-to-seek
+// timestamps. Chips seek the inline player; noEmbed videos deep-link to
+// YouTube at the right moment instead.
+function recapHtml(pl, vid) {
+  const v = DATA.videos[vid];
+  const key = `${pl.id}:${vid}`;
+  const points = v.recap.points
+    .map((p) => {
+      let chip = "";
+      if (p.t != null) {
+        chip = v.noEmbed
+          ? `<a class="t-chip" href="${watchUrl(vid, pl.id)}&t=${Math.floor(p.t)}s"
+               target="_blank" rel="noopener" aria-label="Watch from ${fmtDuration(p.t)} on YouTube">${fmtDuration(p.t)}</a>`
+          : `<button class="t-chip" data-seek-key="${key}" data-seek-t="${Math.floor(p.t)}"
+               aria-label="Play from ${fmtDuration(p.t)}">${fmtDuration(p.t)}</button>`;
+      }
+      return `<li class="${p.t != null ? "has-t" : ""}">${chip}<span>${esc(p.text)}</span></li>`;
+    })
+    .join("");
+  return `
+    <div class="recap" ${isWatched(vid) ? "" : "hidden"}>
+      <p class="takeaways-label recap-label">Carry it forward</p>
+      <p class="recap-summary">${esc(v.recap.summary)}</p>
+      <ul class="recap-points">${points}</ul>
+    </div>`;
+}
+
 function videoRowHtml(pl, vid) {
   const v = DATA.videos[vid];
   const key = `${pl.id}:${vid}`;
@@ -221,8 +248,12 @@ function videoRowHtml(pl, vid) {
     <div class="video-detail" hidden>
       <div class="player-shell" data-shell="${key}">${shellThumbHtml(vid, key)}</div>
       <p class="overview">${esc(v.overview)}</p>
-      <p class="takeaways-label">Key takeaways</p>
-      <ul class="takeaways">${v.takeaways.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
+      <div class="pregame" ${watched ? "hidden" : ""}>
+        <p class="takeaways-label">Key takeaways</p>
+        <ul class="takeaways">${v.takeaways.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
+        <p class="recap-locked">Finish this video to unlock the full recap with timestamps.</p>
+      </div>
+      ${recapHtml(pl, vid)}
       ${others.length ? `<p class="also-in">Also appears in: ${others.map(esc).join(", ")} — watching it once counts everywhere.</p>` : ""}
       <div class="detail-actions">
         ${v.noEmbed
@@ -289,6 +320,11 @@ function renderPlaylists() {
 
   // Play buttons are created dynamically (shells get re-thumbed), so delegate.
   main.addEventListener("click", (e) => {
+    const chip = e.target.closest("[data-seek-key]");
+    if (chip) {
+      playInline(chip.dataset.seekKey, Number(chip.dataset.seekT));
+      return;
+    }
     const playBtn = e.target.closest("[data-play]");
     if (playBtn) playInline(playBtn.dataset.play);
   });
@@ -337,6 +373,8 @@ function updateWatchedUI(vid) {
     box.classList.toggle("watched", watched);
     box.querySelector("[data-check]").setAttribute("aria-checked", watched);
     box.querySelector("[data-mark]").textContent = watched ? "Watched ✓" : "Mark watched";
+    box.querySelector(".pregame").hidden = watched;
+    box.querySelector(".recap").hidden = !watched;
     const bar = box.querySelector(".vprogress");
     const vpct = watched ? 0 : positionPct(vid);
     bar.hidden = !vpct;
@@ -437,9 +475,17 @@ function destroyPlayer() {
   if (shell) shell.innerHTML = shellThumbHtml(vid, key);
 }
 
-async function playInline(key) {
+// startAt (seconds) comes from a recap timestamp chip: jump straight there,
+// seeking in place when this video is already the active player.
+async function playInline(key, startAt = null) {
   const vid = key.split(":")[1];
-  if (player.key === key) return;
+  if (player.key === key) {
+    if (startAt != null && player.yt?.seekTo) {
+      player.yt.seekTo(startAt, true);
+      player.yt.playVideo();
+    }
+    return;
+  }
   destroyPlayer();
   // Claim the slot before awaiting the API so a second tap can't race us;
   // every async continuation below re-checks the claim before acting.
@@ -458,8 +504,10 @@ async function playInline(key) {
       autoplay: 1,
       playsinline: 1,
       rel: 0,
-      // restart near-finished videos from the top
-      start: start > 0 && state.positions[vid].d && start < state.positions[vid].d * AUTO_MARK_AT ? start : 0,
+      // recap chips pick the spot; otherwise resume, restarting near-finished videos
+      start: startAt != null
+        ? Math.floor(startAt)
+        : start > 0 && state.positions[vid].d && start < state.positions[vid].d * AUTO_MARK_AT ? start : 0,
     },
     events: {
       onReady: (e) => {

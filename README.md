@@ -74,6 +74,13 @@ old GitHub Pages URL still serves the static app but has no roster API.
   shows a "Resume m:ss" chip and starts where you left off. Reaching 90%
   (or the end) auto-marks the video watched — the manual diamond toggle
   still works for overrides.
+- **Carry-forward recaps**: before a video is watched its detail view shows a
+  spoiler-light overview + 3 key takeaways. Once it's watched (auto or
+  manual), that section upgrades to a "Carry it forward" recap — a fuller
+  lessons-learned summary plus a detailed point list. Points carry timestamp
+  chips (grounded in each video's actual chapters/transcript) that seek the
+  inline player straight to that moment; on the one embed-disabled video they
+  deep-link to YouTube at the right second instead.
 - **Tracking** lives in `localStorage` (keys `backspin-program-watched-v1`
   and `backspin-program-positions-v1`), per browser/device. "Reset all
   progress" in the footer clears both.
@@ -87,19 +94,27 @@ old GitHub Pages URL still serves the static app but has no roster API.
 | File | Role |
 |---|---|
 | `index.html` / `styles.css` / `app.js` | The whole app — vanilla JS, no framework |
-| `data.js` | Generated dataset: playlists, videos, overviews, takeaways |
+| `data.js` | Generated dataset: playlists, videos, overviews, takeaways, recaps |
 | `scripts/gen_data.py` | Regenerates `data.js` from the inputs below |
-| `scripts/content.json` | Hand-curated overviews/takeaways + phase sequence (source of truth for content) |
+| `scripts/content.json` | Hand-curated overviews/takeaways/recaps + phase sequence (source of truth for content) |
 | `scripts/pl_*.json` | Raw `yt-dlp --flat-playlist` dumps of the 6 playlists (source of truth for structure) |
+| `.github/workflows/fetch-yt-meta.yml` | On-demand CI fetch of per-video descriptions/chapters/auto-captions into `scripts/yt_meta/` — the grounding for recap timestamps |
 
 ### Refreshing when the channel adds videos
 
 ```bash
 # re-dump a playlist (repeat per playlist id, see PLAYLIST_ORDER in gen_data.py)
 yt-dlp -J --flat-playlist "https://www.youtube.com/playlist?list=<PLAYLIST_ID>" > scripts/pl_<PLAYLIST_ID>.json
-# add overview/takeaways for any new video ids to scripts/content.json, then:
+# add overview/takeaways/recap for any new video ids to scripts/content.json, then:
 python3 scripts/gen_data.py
 ```
+
+For a new video's recap, run the `fetch-yt-meta` workflow (Actions →
+fetch-yt-meta → Run workflow, after adding the id to
+`scripts/yt_fetch_ids.txt`) to pull its description, chapters, and
+auto-captions into `scripts/yt_meta/` — write the timestamped recap points
+from those, never from memory. `gen_data.py` validates every recap
+(summary + points, timestamps in range and in order).
 
 The generator fails loudly if a playlist video has no curated content entry
 (or vice versa), so ID typos can't silently break the app.

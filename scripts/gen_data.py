@@ -52,6 +52,7 @@ for phase in content["phases"]:
             "seq": seq,
             "overview": v["overview"],
             "takeaways": v["takeaways"],
+            "recap": v["recap"],
         }
 
 videos = {}   # id -> merged record
@@ -93,6 +94,32 @@ if missing or extra:
 
 for vid, rec in videos.items():
     rec.update(curated[vid])
+
+# Validate recaps: every video gets a post-watch "carry forward" recap — a
+# summary plus a lessons list whose optional timestamps must be sane.
+recap_errors = []
+for vid, rec in videos.items():
+    recap = rec.get("recap")
+    if not isinstance(recap, dict) or not recap.get("summary") or not recap.get("points"):
+        recap_errors.append(f"{vid} {rec['title']}: recap needs 'summary' and 'points'")
+        continue
+    last_t = -1
+    for i, p in enumerate(recap["points"]):
+        if not isinstance(p, dict) or not p.get("text"):
+            recap_errors.append(f"{vid} point {i}: needs 'text'")
+            continue
+        t = p.get("t")
+        if t is None:
+            continue
+        if not isinstance(t, (int, float)) or t < 0 or t >= rec["duration"]:
+            recap_errors.append(f"{vid} point {i}: t={t} outside 0..{rec['duration']}s")
+        elif t < last_t:
+            recap_errors.append(f"{vid} point {i}: t={t} goes backwards (prev {last_t})")
+        else:
+            last_t = t
+if recap_errors:
+    print("RECAP problems:", *recap_errors, sep="\n  ")
+    sys.exit(1)
 
 out = {
     "channel": "Anderson Miller — Unfinished Player Development",

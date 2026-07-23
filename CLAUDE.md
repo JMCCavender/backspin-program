@@ -16,6 +16,12 @@ See README.md for the full architecture and refresh workflow.
   reappears, the generator will fail asking for content — that's expected.
 - "Backspin & Hitting" contains 3 duplicated entries within the playlist
   itself; within-playlist dedupe in the generator handles it.
+- Every video in `content.json` needs a `recap` (`summary` + `points`, each
+  point optionally timestamped `t` in seconds) — it's the detailed
+  "Carry it forward" section shown once a video is watched. Timestamps must
+  come from the real video (chapters/captions in `scripts/yt_meta/`, fetched
+  by the `fetch-yt-meta` workflow) — never guessed. `gen_data.py` validates
+  presence, range, and ordering.
 - All strings rendered via `innerHTML` in `app.js` must pass through `esc()`.
   Data is locally generated (no user input), but keep the habit.
 - localStorage keys are versioned (`backspin-program-watched-v1`,
