@@ -12,6 +12,7 @@ on:
     paths:
       - .github/workflows/fetch-yt-meta.yml
       - scripts/yt_fetch_ids.txt
+      - scripts/fetch_yt_meta.py
 
 permissions:
   contents: write
@@ -25,31 +26,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -U yt-dlp
-      - name: Fetch metadata + auto-captions
-        run: |
-          mkdir -p scripts/yt_meta
-          : > scripts/yt_meta/_failures.txt
-          while read -r id; do
-            [ -z "$id" ] && continue
-            echo "=== $id"
-            ok=1
-            yt-dlp --skip-download --write-info-json --write-auto-subs \
-              --sub-langs en --sub-format vtt --no-warnings \
-              --sleep-requests 1 \
-              -o "scripts/yt_meta/%(id)s" "https://www.youtube.com/watch?v=$id" || ok=0
-            if [ ! -f "scripts/yt_meta/$id.info.json" ]; then ok=0; fi
-            [ "$ok" = 0 ] && echo "$id" >> scripts/yt_meta/_failures.txt
-            sleep 2
-          done < scripts/yt_fetch_ids.txt
-          # Trim the giant info.json files down to the fields we need.
-          for f in scripts/yt_meta/*.info.json; do
-            [ -e "$f" ] || continue
-            jq '{id, title, duration, upload_date, description, chapters}' "$f" > "${f%.info.json}.meta.json"
-            rm "$f"
-          done
-          echo "--- failures:"; cat scripts/yt_meta/_failures.txt || true
-          ls scripts/yt_meta | head -20
+      - name: Fetch metadata + transcripts from watch pages
+        run: python scripts/fetch_yt_meta.py
       - name: Commit results to branch
         run: |
           git config user.name "github-actions[bot]"
