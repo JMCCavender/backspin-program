@@ -7,6 +7,7 @@
 
 const STORE_KEY = "backspin-program-watched-v1";
 const POS_KEY = "backspin-program-positions-v1";
+const QUIZ_KEY = "backspin-program-quiz-v1";
 const AUTO_MARK_AT = 0.9; // fraction of video watched that auto-marks it
 
 // ── State ────────────────────────────────────────────────────────────────
@@ -22,6 +23,7 @@ function loadJson(key) {
 const state = {
   watched: loadJson(STORE_KEY), // videoId -> ISO timestamp
   positions: loadJson(POS_KEY), // videoId -> {t: seconds, d: duration, at: ISO}
+  quiz: loadJson(QUIZ_KEY), // videoId -> {score: 0-3, at: ISO} (latest attempt, local only)
 };
 
 function saveWatched() {
@@ -32,6 +34,12 @@ function saveWatched() {
 function savePositions() {
   localStorage.setItem(POS_KEY, JSON.stringify(state.positions));
   if (typeof scheduleCloudSync === "function") scheduleCloudSync();
+}
+
+// Quiz results stay local-only (not cloud-synced) — Clerk metadata has an
+// 8KB cap and watch state is the progress that matters cross-device.
+function saveQuiz() {
+  localStorage.setItem(QUIZ_KEY, JSON.stringify(state.quiz));
 }
 
 function isWatched(id) {
@@ -229,6 +237,7 @@ function videoRowHtml(pl, vid) {
           ? `<a class="btn btn-watch" href="${watchUrl(vid, pl.id)}" target="_blank" rel="noopener">Watch on YouTube</a>`
           : `<button class="btn btn-watch" data-play="${key}">▶ Play here</button>`}
         <button class="btn btn-mark" data-mark="${vid}">${watched ? "Watched ✓" : "Mark watched"}</button>
+        <button class="btn btn-quiz" data-quiz="${vid}" ${watched ? "" : "hidden"}>${quizBtnLabel(vid)}</button>
       </div>
       ${v.noEmbed ? "" : `<p class="yt-link"><a href="${watchUrl(vid, pl.id)}" target="_blank" rel="noopener">Open in YouTube ↗</a></p>`}
     </div>
@@ -287,6 +296,10 @@ function renderPlaylists() {
     btn.addEventListener("click", () => toggleWatched(btn.dataset.mark))
   );
 
+  main.querySelectorAll("[data-quiz]").forEach((btn) =>
+    btn.addEventListener("click", () => openQuiz(btn.dataset.quiz))
+  );
+
   // Play buttons are created dynamically (shells get re-thumbed), so delegate.
   main.addEventListener("click", (e) => {
     const playBtn = e.target.closest("[data-play]");
@@ -337,6 +350,9 @@ function updateWatchedUI(vid) {
     box.classList.toggle("watched", watched);
     box.querySelector("[data-check]").setAttribute("aria-checked", watched);
     box.querySelector("[data-mark]").textContent = watched ? "Watched ✓" : "Mark watched";
+    const quizBtn = box.querySelector("[data-quiz]");
+    quizBtn.hidden = !watched;
+    quizBtn.textContent = quizBtnLabel(vid);
     const bar = box.querySelector(".vprogress");
     const vpct = watched ? 0 : positionPct(vid);
     bar.hidden = !vpct;
@@ -386,6 +402,153 @@ function jumpToVideo(vid, autoplay = false) {
     ?.scrollIntoView({ behavior: "smooth", block: "center" });
   if (autoplay && !DATA.videos[vid].noEmbed) playInline(`${pl.id}:${vid}`);
 }
+
+// ── Post-video quiz ──────────────────────────────────────────────────────
+// Finishing a video (player ENDED) opens a 3-question multiple-choice quiz.
+// Every answer — right or wrong — shows an explanation plus a timestamped
+// link back into the video. Results live in localStorage only.
+
+const activeQuiz = { vid: null, idx: 0, correct: 0, order: null, locked: false };
+
+function quizBtnLabel(vid) {
+  const r = state.quiz[vid];
+  return r ? `Quiz ${r.score}/3 · retake` : "Take the quiz";
+}
+
+function updateQuizUI(vid) {
+  document.querySelectorAll(`.video[data-video="${vid}"] [data-quiz]`).forEach((btn) => {
+    btn.textContent = quizBtnLabel(vid);
+  });
+}
+
+// Timestamped "review this part" link, carrying playlist context like the
+// app's other YouTube links.
+function reviewLinkHtml(vid, t) {
+  const pl = DATA.playlists.find((p) => p.videos.includes(vid));
+  return `<a href="${watchUrl(vid, pl.id)}&t=${Math.floor(t)}s" target="_blank" rel="noopener">
+    Review this part of the video at ${fmtDuration(t)} ↗</a>`;
+}
+
+function shuffled(n) {
+  const a = [...Array(n).keys()];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function openQuiz(vid) {
+  // Pause inline playback so the quiz has the floor.
+  if (player.yt && player.vid === vid) {
+    try { player.yt.pauseVideo(); } catch { /* mid-teardown */ }
+  }
+  activeQuiz.vid = vid;
+  activeQuiz.idx = 0;
+  activeQuiz.correct = 0;
+  el("#quiz-overlay").hidden = false;
+  renderQuizQuestion();
+}
+
+function closeQuiz() {
+  el("#quiz-overlay").hidden = true;
+  activeQuiz.vid = null;
+}
+
+function renderQuizQuestion() {
+  const v = DATA.videos[activeQuiz.vid];
+  const q = v.quiz[activeQuiz.idx];
+  activeQuiz.order = shuffled(q.choices.length); // display slot -> choice index
+  activeQuiz.locked = false;
+  el("#quiz-overlay").innerHTML = `
+  <div class="quiz-modal" role="dialog" aria-modal="true" aria-labelledby="quiz-q">
+    <div class="quiz-head">
+      <span class="eyebrow">Post-video quiz · ${activeQuiz.idx + 1} of ${v.quiz.length}</span>
+      <button class="quiz-close" aria-label="Close quiz">✕</button>
+    </div>
+    <p class="quiz-video">${esc(v.title)}</p>
+    <p class="quiz-q" id="quiz-q">${esc(q.q)}</p>
+    <div class="quiz-choices">
+      ${activeQuiz.order.map((ci, slot) => `
+        <button class="quiz-choice" data-choice="${ci}">
+          <span class="quiz-letter">${"ABCD"[slot]}</span>${esc(q.choices[ci])}
+        </button>`).join("")}
+    </div>
+    <div class="quiz-feedback" hidden>
+      <p class="quiz-verdict"></p>
+      <p class="quiz-explain">${esc(q.explain)}</p>
+      <p class="quiz-review">${reviewLinkHtml(v.id, q.t)}</p>
+      <button class="btn btn-watch quiz-next"></button>
+    </div>
+  </div>`;
+  el("#quiz-overlay .quiz-close").addEventListener("click", closeQuiz);
+  el("#quiz-overlay .quiz-choices").addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-choice]");
+    if (btn) answerQuiz(Number(btn.dataset.choice));
+  });
+  el("#quiz-overlay .quiz-choice").focus();
+}
+
+function answerQuiz(choice) {
+  if (activeQuiz.locked) return;
+  activeQuiz.locked = true;
+  const v = DATA.videos[activeQuiz.vid];
+  const q = v.quiz[activeQuiz.idx];
+  const right = choice === q.answer;
+  if (right) activeQuiz.correct++;
+  document.querySelectorAll("#quiz-overlay .quiz-choice").forEach((btn) => {
+    const ci = Number(btn.dataset.choice);
+    btn.disabled = true;
+    if (ci === q.answer) btn.classList.add("correct");
+    else if (ci === choice) btn.classList.add("wrong");
+  });
+  const fb = el("#quiz-overlay .quiz-feedback");
+  fb.hidden = false;
+  const verdict = fb.querySelector(".quiz-verdict");
+  verdict.textContent = right ? "✓ Correct" : "✗ Not quite";
+  verdict.classList.toggle("right", right);
+  const next = fb.querySelector(".quiz-next");
+  const last = activeQuiz.idx === v.quiz.length - 1;
+  next.textContent = last ? "See results" : "Next question";
+  next.addEventListener("click", () => {
+    if (last) renderQuizResults();
+    else { activeQuiz.idx++; renderQuizQuestion(); }
+  });
+  next.focus();
+}
+
+function renderQuizResults() {
+  const v = DATA.videos[activeQuiz.vid];
+  const score = activeQuiz.correct;
+  state.quiz[v.id] = { score, at: new Date().toISOString() };
+  saveQuiz();
+  updateQuizUI(v.id);
+  const line = score === 3 ? "Perfect — you own this one. On to the next video."
+    : score === 2 ? "Solid — one got away. Retake it or rewatch that part and move on."
+    : "Worth a rewatch — retake the quiz and use the review links to jump straight to the answers.";
+  el("#quiz-overlay").innerHTML = `
+  <div class="quiz-modal" role="dialog" aria-modal="true" aria-labelledby="quiz-score">
+    <div class="quiz-head">
+      <span class="eyebrow">Post-video quiz · results</span>
+      <button class="quiz-close" aria-label="Close quiz">✕</button>
+    </div>
+    <p class="quiz-video">${esc(v.title)}</p>
+    <p class="quiz-score" id="quiz-score">${score}<span>/3</span></p>
+    <p class="quiz-explain">${line}</p>
+    <div class="detail-actions">
+      <button class="btn btn-watch quiz-done">Done</button>
+      <button class="btn btn-mark quiz-retake">Retake quiz</button>
+    </div>
+  </div>`;
+  el("#quiz-overlay .quiz-close").addEventListener("click", closeQuiz);
+  el("#quiz-overlay .quiz-done").addEventListener("click", closeQuiz);
+  el("#quiz-overlay .quiz-retake").addEventListener("click", () => openQuiz(v.id));
+  el("#quiz-overlay .quiz-done").focus();
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && activeQuiz.vid) closeQuiz();
+});
 
 // ── Embedded YouTube player ──────────────────────────────────────────────
 
@@ -478,6 +641,8 @@ async function playInline(key) {
             saveWatched();
             updateWatchedUI(vid);
           }
+          // First completion opens the quiz; retakes live on the detail button.
+          if (!state.quiz[vid]) openQuiz(vid);
         }
       },
       onError: () => {
@@ -504,9 +669,12 @@ el("#reset-btn").addEventListener("click", () => {
   if (confirm("Clear all watch progress? This can't be undone.")) {
     state.watched = {};
     state.positions = {};
+    state.quiz = {};
     saveWatched();
     savePositions();
+    saveQuiz();
     destroyPlayer();
+    closeQuiz();
     render();
     openFirstIncomplete();
   }
@@ -522,6 +690,7 @@ function openFirstIncomplete() {
 function initApp() {
   state.watched = loadJson(STORE_KEY);
   state.positions = loadJson(POS_KEY);
+  state.quiz = loadJson(QUIZ_KEY);
   render();
   openFirstIncomplete();
 }

@@ -19,8 +19,17 @@ See README.md for the full architecture and refresh workflow.
 - All strings rendered via `innerHTML` in `app.js` must pass through `esc()`.
   Data is locally generated (no user input), but keep the habit.
 - localStorage keys are versioned (`backspin-program-watched-v1`,
-  `backspin-program-positions-v1`); if a stored shape ever changes, bump the
-  version rather than migrating in place.
+  `backspin-program-positions-v1`, `backspin-program-quiz-v1`); if a stored
+  shape ever changes, bump the version rather than migrating in place.
+- Post-video quizzes live in `scripts/quiz.json` (3 questions per video:
+  choices, answer index, explanation, review timestamp `t` in seconds).
+  The generator validates the ID set and question shape the same way it
+  does `content.json`. The `t` values were seeded at ~15/45/75% of each
+  video's duration — refine them in `quiz.json` as videos get rewatched.
+  Quiz scores are intentionally NOT cloud-synced (Clerk 8KB metadata cap).
+- Elements hidden via the `hidden` attribute must not get an author
+  `display` value without a `[hidden] { display: none; }` override — see
+  `.quiz-overlay` and `.btn-quiz` in styles.css for the pattern.
 - **Never call full `render()` after page load** — it destroys an active
   embedded YouTube player. All post-load updates go through the surgical
   helpers in app.js (`updateWatchedUI`, `updateLiveProgress`,
