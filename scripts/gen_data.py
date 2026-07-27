@@ -40,6 +40,8 @@ PHASE_NAMES = {
 }
 
 content = json.loads((SCRATCH / "content.json").read_text())
+quiz = json.loads((SCRATCH / "quiz.json").read_text())
+recaps = json.loads((SCRATCH / "recaps.json").read_text())
 
 # Flatten curated content into id -> record, with global curriculum sequence.
 curated = {}
@@ -91,8 +93,44 @@ if missing or extra:
         print("EXTRA content ids:", *extra, sep="\n  ")
     sys.exit(1)
 
+# Validate quiz coverage and shape: every video gets exactly 3 questions,
+# each with 4 choices, a valid answer index, an explanation, and a review
+# timestamp inside the video.
+quiz_missing = scraped_ids - set(quiz)
+quiz_extra = set(quiz) - scraped_ids
+if quiz_missing or quiz_extra:
+    if quiz_missing:
+        print("MISSING quiz for:", *(f"  {i} {videos[i]['title']}" for i in quiz_missing), sep="\n")
+    if quiz_extra:
+        print("EXTRA quiz ids:", *quiz_extra, sep="\n  ")
+    sys.exit(1)
+for vid, questions in quiz.items():
+    dur = videos[vid]["duration"]
+    if len(questions) != 3:
+        sys.exit(f"quiz for {vid} has {len(questions)} questions, want 3")
+    for q in questions:
+        if (len(q["choices"]) != 4 or not 0 <= q["answer"] <= 3
+                or not q["explain"] or not 0 <= q["t"] < dur):
+            sys.exit(f"malformed quiz question in {vid}: {q['q']!r}")
+
+# Validate recap coverage and shape: every video gets a detailed post-watch
+# recap of 4-6 substantial points.
+recap_missing = scraped_ids - set(recaps)
+recap_extra = set(recaps) - scraped_ids
+if recap_missing or recap_extra:
+    if recap_missing:
+        print("MISSING recap for:", *(f"  {i} {videos[i]['title']}" for i in recap_missing), sep="\n")
+    if recap_extra:
+        print("EXTRA recap ids:", *recap_extra, sep="\n  ")
+    sys.exit(1)
+for vid, points in recaps.items():
+    if not 4 <= len(points) <= 6 or not all(isinstance(p, str) and p for p in points):
+        sys.exit(f"malformed recap for {vid}: want 4-6 non-empty strings")
+
 for vid, rec in videos.items():
     rec.update(curated[vid])
+    rec["quiz"] = quiz[vid]
+    rec["recap"] = recaps[vid]
 
 out = {
     "channel": "Anderson Miller — Unfinished Player Development",

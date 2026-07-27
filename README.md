@@ -74,9 +74,18 @@ old GitHub Pages URL still serves the static app but has no roster API.
   shows a "Resume m:ss" chip and starts where you left off. Reaching 90%
   (or the end) auto-marks the video watched — the manual diamond toggle
   still works for overrides.
-- **Tracking** lives in `localStorage` (keys `backspin-program-watched-v1`
-  and `backspin-program-positions-v1`), per browser/device. "Reset all
-  progress" in the footer clears both.
+- **Post-video recap + quiz**: when an embedded video plays to the end, an
+  overlay opens with a detailed recap of the video's contents (overview +
+  4-6 "what this video covered" points) for review, then a 3-question
+  multiple-choice quiz (auto-opens on first completion only — after that it
+  lives on the "Recap & quiz" button in the video's detail, which appears
+  once the video is watched). Choices are shuffled per attempt; every
+  answer, right or wrong, shows an explanation plus a timestamped "review
+  this part" link into the video on YouTube. Scores
+  (`backspin-program-quiz-v1`) are local-only — they are not cloud-synced.
+- **Tracking** lives in `localStorage` (keys `backspin-program-watched-v1`,
+  `backspin-program-positions-v1`, and `backspin-program-quiz-v1`), per
+  browser/device. "Reset all progress" in the footer clears all three.
 - **"Open in YouTube" links** carry the playlist context (`watch?v=…&list=…`)
   so the video opens inside its playlist in the YouTube app. One video
   ("The Setup: Introduction") has embedding disabled by the channel and
@@ -90,6 +99,8 @@ old GitHub Pages URL still serves the static app but has no roster API.
 | `data.js` | Generated dataset: playlists, videos, overviews, takeaways |
 | `scripts/gen_data.py` | Regenerates `data.js` from the inputs below |
 | `scripts/content.json` | Hand-curated overviews/takeaways + phase sequence (source of truth for content) |
+| `scripts/quiz.json` | Hand-curated post-video quizzes: 3 questions per video with choices, answer, explanation, and a review timestamp (`t`, seconds) |
+| `scripts/recaps.json` | Hand-curated post-video recaps: 4-6 detailed review points per video, shown before the quiz |
 | `scripts/pl_*.json` | Raw `yt-dlp --flat-playlist` dumps of the 6 playlists (source of truth for structure) |
 
 ### Refreshing when the channel adds videos
@@ -97,12 +108,15 @@ old GitHub Pages URL still serves the static app but has no roster API.
 ```bash
 # re-dump a playlist (repeat per playlist id, see PLAYLIST_ORDER in gen_data.py)
 yt-dlp -J --flat-playlist "https://www.youtube.com/playlist?list=<PLAYLIST_ID>" > scripts/pl_<PLAYLIST_ID>.json
-# add overview/takeaways for any new video ids to scripts/content.json, then:
+# add overview/takeaways for any new video ids to scripts/content.json,
+# add a 3-question quiz to scripts/quiz.json and a recap to
+# scripts/recaps.json, then:
 python3 scripts/gen_data.py
 ```
 
-The generator fails loudly if a playlist video has no curated content entry
-(or vice versa), so ID typos can't silently break the app.
+The generator fails loudly if a playlist video has no curated content,
+quiz, or recap entry (or vice versa), so ID typos can't silently break the
+app.
 
 ## Design decisions
 
