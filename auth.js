@@ -28,6 +28,14 @@ function trimmedPositions() {
   return out;
 }
 
+// Quiz scores are trimmed to videoId -> best score (0-3) — no timestamps,
+// so all 67 fit in ~1.3KB of the 8KB metadata budget.
+function trimmedQuiz() {
+  const out = {};
+  for (const [vid, r] of Object.entries(state.quiz)) out[vid] = r.score;
+  return out;
+}
+
 async function pushCloudProgress() {
   if (cloudBusy) { cloudDirty = true; return; }
   cloudBusy = true;
@@ -37,6 +45,7 @@ async function pushCloudProgress() {
         progress: {
           watched: state.watched,
           positions: trimmedPositions(),
+          quiz: trimmedQuiz(),
           updatedAt: new Date().toISOString(),
         },
       },
@@ -52,6 +61,7 @@ async function pushCloudProgress() {
 
 // Merge cloud progress into localStorage before the app first renders.
 // Watched: union (earliest timestamp wins). Positions: newest `at` wins.
+// Quiz: best score wins (cloud stores bare scores, local stores {score, at}).
 function mergeCloudProgress(cloud) {
   if (!cloud) return;
   const watched = JSON.parse(localStorage.getItem("backspin-program-watched-v1") || "{}");
@@ -62,8 +72,13 @@ function mergeCloudProgress(cloud) {
   for (const [vid, p] of Object.entries(cloud.positions || {})) {
     if (!positions[vid] || (p.at || "") > (positions[vid].at || "")) positions[vid] = p;
   }
+  const quiz = JSON.parse(localStorage.getItem("backspin-program-quiz-v1") || "{}");
+  for (const [vid, score] of Object.entries(cloud.quiz || {})) {
+    if (!quiz[vid] || score > quiz[vid].score) quiz[vid] = { score };
+  }
   localStorage.setItem("backspin-program-watched-v1", JSON.stringify(watched));
   localStorage.setItem("backspin-program-positions-v1", JSON.stringify(positions));
+  localStorage.setItem("backspin-program-quiz-v1", JSON.stringify(quiz));
 }
 
 function setSyncBadge(mode) {
@@ -75,8 +90,32 @@ function setSyncBadge(mode) {
 
 // ── Coach (admin) view ───────────────────────────────────────────────────
 
+// Per-user expandable list: every video in curriculum order with watched
+// state and best quiz score, grouped by phase.
+function rosterVideosHtml(watched, quiz) {
+  const vids = Object.values(DATA.videos).sort((a, b) => a.seq - b.seq);
+  let phase = -1;
+  const rows = vids.map((v) => {
+    const header = v.phase !== phase
+      ? `<p class="rv-phase">Phase ${v.phase}: ${esc(DATA.phaseNames[v.phase])}</p>` : "";
+    phase = v.phase;
+    const score = quiz[v.id];
+    return `${header}
+    <div class="rv-row ${watched[v.id] ? "watched" : ""}">
+      <span class="rv-check">${watched[v.id] ? "✓" : "·"}</span>
+      <span class="rv-title">${esc(v.title)}</span>
+      <span class="rv-quiz ${score === 3 ? "perfect" : ""}">${score == null ? "—" : `${score}/3`}</span>
+    </div>`;
+  }).join("");
+  return `<details class="roster-videos">
+    <summary>Videos & quizzes</summary>
+    <div class="rv-list">${rows}</div>
+  </details>`;
+}
+
 function rosterRowHtml(u) {
   const watched = u.progress?.watched || {};
+  const quiz = u.progress?.quiz || {};
   const allIds = Object.keys(DATA.videos);
   const done = allIds.filter((id) => watched[id]).length;
   const pct = Math.round((done / allIds.length) * 100);
@@ -89,6 +128,10 @@ function rosterRowHtml(u) {
       <span class="chalkbar"><span class="chalkbar-fill ${plPct === 100 ? "complete" : ""}" style="width:${plPct}%"></span></span>
     </div>`;
   }).join("");
+  const scores = Object.values(quiz);
+  const quizLine = scores.length
+    ? `${scores.length}/${allIds.length} quizzes · avg ${(scores.reduce((s, n) => s + n, 0) / scores.length).toFixed(1)}/3 · ${scores.filter((n) => n === 3).length} perfect`
+    : "no quizzes yet";
   const last = u.lastActiveAt ? new Date(u.lastActiveAt).toLocaleDateString() : "—";
   return `
   <div class="roster-card">
@@ -99,7 +142,9 @@ function rosterRowHtml(u) {
     </div>
     <div class="chalkbar roster-overall"><span class="chalkbar-fill ${pct === 100 ? "complete" : ""}" style="width:${pct}%"></span></div>
     <div class="roster-playlists">${perPlaylist}</div>
+    <div class="roster-meta">${quizLine}</div>
     <div class="roster-meta">${inProgress ? `${inProgress} video${inProgress > 1 ? "s" : ""} in progress · ` : ""}last active ${last}</div>
+    ${rosterVideosHtml(watched, quiz)}
   </div>`;
 }
 
