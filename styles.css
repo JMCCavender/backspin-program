@@ -714,6 +714,24 @@ a { color: var(--amber); }
   margin-bottom: 14px;
 }
 
+.recap-overview {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--chalk);
+  margin-bottom: 14px;
+}
+
+.recap-list { margin-bottom: 16px; }
+.recap-list li { margin-bottom: 10px; }
+
+.quiz-start { width: 100%; }
+
+.quiz-reread {
+  color: var(--chalk-dim);
+  font-size: 12px;
+  text-decoration: underline;
+}
+
 .quiz-choices { display: grid; gap: 8px; }
 
 .quiz-choice {

@@ -22,11 +22,13 @@ See README.md for the full architecture and refresh workflow.
   `backspin-program-positions-v1`, `backspin-program-quiz-v1`); if a stored
   shape ever changes, bump the version rather than migrating in place.
 - Post-video quizzes live in `scripts/quiz.json` (3 questions per video:
-  choices, answer index, explanation, review timestamp `t` in seconds).
-  The generator validates the ID set and question shape the same way it
-  does `content.json`. The `t` values were seeded at ~15/45/75% of each
-  video's duration — refine them in `quiz.json` as videos get rewatched.
-  Quiz scores are intentionally NOT cloud-synced (Clerk 8KB metadata cap).
+  choices, answer index, explanation, review timestamp `t` in seconds);
+  detailed post-video recaps live in `scripts/recaps.json` (4-6 review
+  points per video, shown in the overlay before the quiz). The generator
+  validates both ID sets and shapes the same way it does `content.json`.
+  The `t` values were seeded at ~15/45/75% of each video's duration —
+  refine them in `quiz.json` as videos get rewatched. Quiz scores are
+  intentionally NOT cloud-synced (Clerk 8KB metadata cap).
 - Elements hidden via the `hidden` attribute must not get an author
   `display` value without a `[hidden] { display: none; }` override — see
   `.quiz-overlay` and `.btn-quiz` in styles.css for the pattern.

@@ -41,6 +41,7 @@ PHASE_NAMES = {
 
 content = json.loads((SCRATCH / "content.json").read_text())
 quiz = json.loads((SCRATCH / "quiz.json").read_text())
+recaps = json.loads((SCRATCH / "recaps.json").read_text())
 
 # Flatten curated content into id -> record, with global curriculum sequence.
 curated = {}
@@ -112,9 +113,24 @@ for vid, questions in quiz.items():
                 or not q["explain"] or not 0 <= q["t"] < dur):
             sys.exit(f"malformed quiz question in {vid}: {q['q']!r}")
 
+# Validate recap coverage and shape: every video gets a detailed post-watch
+# recap of 4-6 substantial points.
+recap_missing = scraped_ids - set(recaps)
+recap_extra = set(recaps) - scraped_ids
+if recap_missing or recap_extra:
+    if recap_missing:
+        print("MISSING recap for:", *(f"  {i} {videos[i]['title']}" for i in recap_missing), sep="\n")
+    if recap_extra:
+        print("EXTRA recap ids:", *recap_extra, sep="\n  ")
+    sys.exit(1)
+for vid, points in recaps.items():
+    if not 4 <= len(points) <= 6 or not all(isinstance(p, str) and p for p in points):
+        sys.exit(f"malformed recap for {vid}: want 4-6 non-empty strings")
+
 for vid, rec in videos.items():
     rec.update(curated[vid])
     rec["quiz"] = quiz[vid]
+    rec["recap"] = recaps[vid]
 
 out = {
     "channel": "Anderson Miller — Unfinished Player Development",

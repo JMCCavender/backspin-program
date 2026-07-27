@@ -403,16 +403,17 @@ function jumpToVideo(vid, autoplay = false) {
   if (autoplay && !DATA.videos[vid].noEmbed) playInline(`${pl.id}:${vid}`);
 }
 
-// ── Post-video quiz ──────────────────────────────────────────────────────
-// Finishing a video (player ENDED) opens a 3-question multiple-choice quiz.
-// Every answer — right or wrong — shows an explanation plus a timestamped
-// link back into the video. Results live in localStorage only.
+// ── Post-video recap + quiz ──────────────────────────────────────────────
+// Finishing a video (player ENDED) opens a detailed recap of its contents
+// for review, then a 3-question multiple-choice quiz. Every answer — right
+// or wrong — shows an explanation plus a timestamped link back into the
+// video. Results live in localStorage only.
 
 const activeQuiz = { vid: null, idx: 0, correct: 0, order: null, locked: false };
 
 function quizBtnLabel(vid) {
   const r = state.quiz[vid];
-  return r ? `Quiz ${r.score}/3 · retake` : "Take the quiz";
+  return r ? `Quiz ${r.score}/3 · retake` : "Recap & quiz";
 }
 
 function updateQuizUI(vid) {
@@ -438,8 +439,8 @@ function shuffled(n) {
   return a;
 }
 
-function openQuiz(vid) {
-  // Pause inline playback so the quiz has the floor.
+function openQuiz(vid, withRecap = true) {
+  // Pause inline playback so the recap/quiz has the floor.
   if (player.yt && player.vid === vid) {
     try { player.yt.pauseVideo(); } catch { /* mid-teardown */ }
   }
@@ -447,12 +448,33 @@ function openQuiz(vid) {
   activeQuiz.idx = 0;
   activeQuiz.correct = 0;
   el("#quiz-overlay").hidden = false;
-  renderQuizQuestion();
+  if (withRecap) renderQuizRecap();
+  else renderQuizQuestion();
 }
 
 function closeQuiz() {
   el("#quiz-overlay").hidden = true;
   activeQuiz.vid = null;
+}
+
+// Detailed content summary shown after finishing a video, before the quiz.
+function renderQuizRecap() {
+  const v = DATA.videos[activeQuiz.vid];
+  el("#quiz-overlay").innerHTML = `
+  <div class="quiz-modal" role="dialog" aria-modal="true" aria-labelledby="recap-title">
+    <div class="quiz-head">
+      <span class="eyebrow">Video recap · review, then quiz</span>
+      <button class="quiz-close" aria-label="Close recap">✕</button>
+    </div>
+    <p class="quiz-video">${esc(v.title)}</p>
+    <p class="recap-overview" id="recap-title">${esc(v.overview)}</p>
+    <p class="takeaways-label">What this video covered</p>
+    <ul class="takeaways recap-list">${v.recap.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>
+    <button class="btn btn-watch quiz-start">Start the 3-question quiz</button>
+  </div>`;
+  el("#quiz-overlay .quiz-close").addEventListener("click", closeQuiz);
+  el("#quiz-overlay .quiz-start").addEventListener("click", renderQuizQuestion);
+  el("#quiz-overlay .quiz-start").focus();
 }
 
 function renderQuizQuestion() {
@@ -539,10 +561,12 @@ function renderQuizResults() {
       <button class="btn btn-watch quiz-done">Done</button>
       <button class="btn btn-mark quiz-retake">Retake quiz</button>
     </div>
+    <p class="yt-link"><button class="quiz-reread">Reread the recap</button></p>
   </div>`;
   el("#quiz-overlay .quiz-close").addEventListener("click", closeQuiz);
   el("#quiz-overlay .quiz-done").addEventListener("click", closeQuiz);
-  el("#quiz-overlay .quiz-retake").addEventListener("click", () => openQuiz(v.id));
+  el("#quiz-overlay .quiz-retake").addEventListener("click", () => openQuiz(v.id, false));
+  el("#quiz-overlay .quiz-reread").addEventListener("click", () => openQuiz(v.id));
   el("#quiz-overlay .quiz-done").focus();
 }
 
