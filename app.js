@@ -36,10 +36,9 @@ function savePositions() {
   if (typeof scheduleCloudSync === "function") scheduleCloudSync();
 }
 
-// Quiz results stay local-only (not cloud-synced) — Clerk metadata has an
-// 8KB cap and watch state is the progress that matters cross-device.
 function saveQuiz() {
   localStorage.setItem(QUIZ_KEY, JSON.stringify(state.quiz));
+  if (typeof scheduleCloudSync === "function") scheduleCloudSync();
 }
 
 function isWatched(id) {
@@ -542,8 +541,12 @@ function answerQuiz(choice) {
 function renderQuizResults() {
   const v = DATA.videos[activeQuiz.vid];
   const score = activeQuiz.correct;
-  state.quiz[v.id] = { score, at: new Date().toISOString() };
-  saveQuiz();
+  // Keep the best score — simple, kind, and it makes cross-device merging
+  // order-independent (higher wins, no timestamps needed).
+  if (!state.quiz[v.id] || score > state.quiz[v.id].score) {
+    state.quiz[v.id] = { score, at: new Date().toISOString() };
+    saveQuiz();
+  }
   updateQuizUI(v.id);
   const line = score === 3 ? "Perfect — you own this one. On to the next video."
     : score === 2 ? "Solid — one got away. Retake it or rewatch that part and move on."

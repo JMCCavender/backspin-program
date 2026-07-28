@@ -27,8 +27,10 @@ See README.md for the full architecture and refresh workflow.
   points per video, shown in the overlay before the quiz). The generator
   validates both ID sets and shapes the same way it does `content.json`.
   The `t` values were seeded at ~15/45/75% of each video's duration —
-  refine them in `quiz.json` as videos get rewatched. Quiz scores are
-  intentionally NOT cloud-synced (Clerk 8KB metadata cap).
+  refine them in `quiz.json` as videos get rewatched. Quiz scores sync to
+  Clerk trimmed to `{videoId: bestScore}` (`trimmedQuiz()` in auth.js) so
+  the coach view can show them; merges are best-score-wins. Mind the 8KB
+  metadata cap before adding anything else to the cloud payload.
 - Elements hidden via the `hidden` attribute must not get an author
   `display` value without a `[hidden] { display: none; }` override — see
   `.quiz-overlay` and `.btn-quiz` in styles.css for the pattern.
@@ -48,9 +50,11 @@ See README.md for the full architecture and refresh workflow.
   `settling-rattler-88.clerk.accounts.dev`), username+password, restricted
   sign-ups. Secret key: Vercel env `CLERK_SECRET_KEY` +
   `~/.secrets/backspin-clerk-sk` locally — never commit it, never print it.
-- **Deploys go to Vercel** (`vercel deploy --prod --yes`, project
-  `backspin-program`) — GitHub Pages still serves the static app but lacks
-  `/api/roster`, so the coach view only works on the Vercel URL.
+- **Deploys go to Vercel automatically**: the project is connected to
+  GitHub, so merging to `main` deploys production. (`vercel deploy --prod
+  --yes` still works for manual deploys.) GitHub Pages still serves the
+  static app but lacks `/api/roster`, so the coach view only works on the
+  Vercel URL.
 - `initApp()` (app.js) is only called by auth.js after sign-in + cloud
   merge; don't reintroduce an auto-run at the bottom of app.js.
 - Progress pushed to Clerk unsafeMetadata is TRIMMED (`trimmedPositions()` in

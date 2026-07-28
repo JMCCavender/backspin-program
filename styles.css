@@ -198,6 +198,68 @@ a { color: var(--amber); }
   margin-top: 10px;
 }
 
+.roster-videos { margin-top: 10px; }
+
+.roster-videos summary {
+  cursor: pointer;
+  font-family: "Oswald", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber);
+  padding: 4px 0;
+}
+
+.rv-list { margin-top: 6px; }
+
+.rv-phase {
+  font-family: "Oswald", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clay);
+  margin: 10px 0 4px;
+}
+
+.rv-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 3px 0;
+  font-size: 12px;
+  color: var(--chalk-dim);
+}
+
+.rv-row.watched { color: var(--chalk); }
+
+.rv-check {
+  flex: none;
+  width: 14px;
+  text-align: center;
+  color: var(--chalk-dim);
+}
+
+.rv-row.watched .rv-check { color: var(--grass); }
+
+.rv-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rv-quiz {
+  flex: none;
+  font-family: "Oswald", sans-serif;
+  font-size: 11px;
+  color: var(--chalk-dim);
+}
+
+.rv-quiz.perfect { color: var(--amber); }
+
 /* ── Masthead ─────────────────────────────────────────────────────────── */
 
 .masthead { padding: 16px 0 18px; }

@@ -19,12 +19,17 @@ roster.
 - **Per-user progress**: synced (debounced 2.5s) to the signed-in user's
   Clerk `unsafeMetadata.progress` — users can only write their own.
   localStorage remains the offline cache; cloud and local merge on load
-  (watched = union, positions = newest wins).
+  (watched = union, positions = newest wins, quiz = best score wins).
+  Quiz scores sync trimmed to `{videoId: bestScore}` to stay inside
+  Clerk's 8KB metadata cap.
 - **Coach view**: users with `publicMetadata.role === "admin"` get a
   "Coach view" button that calls `GET /api/roster` — a Vercel serverless
   function ([api/roster.js](api/roster.js)) that verifies the Clerk JWT,
-  checks the admin role, and returns every user's progress. The admin role
-  can only be set server-side: `./scripts/grant_admin.sh <username>`.
+  checks the admin role, and returns every user's progress. Each roster
+  card shows overall + per-playlist progress, a quiz summary (taken /
+  average / perfect), and an expandable "Videos & quizzes" list with every
+  video's watched state and best quiz score in curriculum order. The admin
+  role can only be set server-side: `./scripts/grant_admin.sh <username>`.
 - **Secrets**: the Clerk secret key lives in Vercel env
   (`CLERK_SECRET_KEY`, production + preview) and locally at
   `~/.secrets/backspin-clerk-sk` (0600). Never in the repo. The publishable
@@ -38,7 +43,9 @@ Local (static parts only — `/api/roster` 404s locally):
 python3 -m http.server 8371 --directory .   # or .claude/launch.json → backspin-program
 ```
 
-Deploy (Vercel CLI, project `backspin-program`):
+Deploy: the Vercel project (`backspin-program`) is connected to GitHub, so
+merging to `main` deploys production automatically. Manual deploys still
+work via the CLI:
 
 ```bash
 vercel deploy --prod --yes
@@ -81,8 +88,9 @@ old GitHub Pages URL still serves the static app but has no roster API.
   lives on the "Recap & quiz" button in the video's detail, which appears
   once the video is watched). Choices are shuffled per attempt; every
   answer, right or wrong, shows an explanation plus a timestamped "review
-  this part" link into the video on YouTube. Scores
-  (`backspin-program-quiz-v1`) are local-only — they are not cloud-synced.
+  this part" link into the video on YouTube. Best scores are kept
+  (`backspin-program-quiz-v1`) and sync to the cloud so the coach can see
+  them.
 - **Tracking** lives in `localStorage` (keys `backspin-program-watched-v1`,
   `backspin-program-positions-v1`, and `backspin-program-quiz-v1`), per
   browser/device. "Reset all progress" in the footer clears all three.
