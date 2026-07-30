@@ -260,6 +260,71 @@ a { color: var(--amber); }
 
 .rv-quiz.perfect { color: var(--amber); }
 
+/* ── Leaderboard ──────────────────────────────────────────────────────── */
+
+.board-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+}
+
+.board-row.me { border-color: var(--amber); }
+
+.board-rank {
+  flex: none;
+  width: 30px;
+  font-family: "Oswald", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--chalk-dim);
+}
+
+.board-row.top .board-rank { color: var(--amber); }
+
+.board-player { flex: 1; min-width: 0; display: grid; gap: 6px; }
+
+.board-name {
+  font-weight: 600;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.board-you {
+  font-family: "Oswald", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber);
+  border: 1px solid var(--amber);
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin-left: 8px;
+  vertical-align: 2px;
+}
+
+.board-stat { flex: none; text-align: right; display: grid; gap: 2px; }
+
+.board-watched {
+  font-family: "Oswald", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--chalk);
+  line-height: 1;
+}
+
+.board-sub { font-size: 12px; color: var(--chalk-dim); font-weight: 400; }
+
+.board-quiz { font-size: 11px; color: var(--chalk-dim); }
+
 /* ── Masthead ─────────────────────────────────────────────────────────── */
 
 .masthead { padding: 16px 0 18px; }
@@ -332,8 +397,11 @@ a { color: var(--amber); }
   font-variant-numeric: tabular-nums;
 }
 
-/* chalk progress bar — a foul line drawn on dirt */
+/* chalk progress bar — a foul line drawn on dirt.
+ * display:block matters: roster/leaderboard build these from <span>s,
+ * and inline elements ignore the width the fill depends on. */
 .chalkbar {
+  display: block;
   height: 7px;
   background: rgba(0, 0, 0, 0.4);
   border-radius: 4px;
@@ -341,6 +409,7 @@ a { color: var(--amber); }
 }
 
 .chalkbar-fill {
+  display: block;
   height: 100%;
   width: 0%;
   border-radius: 4px;

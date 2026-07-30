@@ -168,6 +168,54 @@ async function openCoachView() {
   }
 }
 
+// ── Leaderboard (all signed-in users) ────────────────────────────────────
+
+// Rank: videos watched, then quiz points (sum of best scores), then perfect
+// quizzes, then name. Returns rows already sorted.
+function sortStandings(users) {
+  return [...users].sort((a, b) =>
+    b.watched - a.watched || b.quizPoints - a.quizPoints ||
+    b.perfect - a.perfect || (a.name || "").localeCompare(b.name || ""));
+}
+
+function boardRowHtml(u, rank, isMe) {
+  const total = Object.keys(DATA.videos).length;
+  const pct = Math.round((u.watched / total) * 100);
+  return `
+  <div class="board-row ${isMe ? "me" : ""} ${rank <= 3 ? "top" : ""}">
+    <span class="board-rank">${rank}</span>
+    <span class="board-player">
+      <span class="board-name">${esc(u.name)}${isMe ? `<span class="board-you">you</span>` : ""}</span>
+      <span class="chalkbar"><span class="chalkbar-fill ${pct === 100 ? "complete" : ""}" style="width:${pct}%"></span></span>
+    </span>
+    <span class="board-stat">
+      <span class="board-watched">${u.watched}<span class="board-sub">/${total}</span></span>
+      <span class="board-quiz">${u.quizPoints} quiz pts${u.perfect ? ` · ${u.perfect} perfect` : ""}</span>
+    </span>
+  </div>`;
+}
+
+async function openLeaderboard() {
+  const section = document.getElementById("board-view");
+  const body = document.getElementById("board-body");
+  section.hidden = !section.hidden;
+  if (section.hidden) return;
+  body.innerHTML = `<p class="coach-note">Loading standings…</p>`;
+  try {
+    const token = await Clerk.session.getToken();
+    const res = await fetch("/api/leaderboard", { headers: { Authorization: `Bearer ${token}` } });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const { users } = await res.json();
+    const me = Clerk.user?.id;
+    body.innerHTML = sortStandings(users)
+      .map((u, i) => boardRowHtml(u, i + 1, u.id === me)).join("") ||
+      `<p class="coach-note">No players yet.</p>`;
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+  } catch (e) {
+    body.innerHTML = `<p class="coach-note">Couldn't load the leaderboard (${e.message}). It only works on the deployed site while signed in.</p>`;
+  }
+}
+
 // ── Boot ─────────────────────────────────────────────────────────────────
 
 window.addEventListener("load", async () => {
@@ -200,6 +248,10 @@ window.addEventListener("load", async () => {
   document.getElementById("user-name").textContent =
     Clerk.user.firstName || Clerk.user.username || "";
   Clerk.mountUserButton(document.getElementById("user-button"));
+
+  const boardBtn = document.getElementById("board-btn");
+  boardBtn.hidden = false;
+  boardBtn.addEventListener("click", openLeaderboard);
 
   if (Clerk.user.publicMetadata?.role === "admin") {
     const btn = document.getElementById("coach-btn");
