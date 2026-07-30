@@ -63,3 +63,6 @@ See README.md for the full architecture and refresh workflow.
 - Admin role lives in `publicMetadata.role` (server-set only, via
   `scripts/grant_admin.sh`). `unsafeMetadata` is client-writable — never put
   authorization data there.
+- `/api/leaderboard` is deliberately NOT admin-gated but returns only
+  aggregate stats (counts/points) per player. Per-video detail stays
+  admin-only in `/api/roster` — keep that split if either endpoint changes.

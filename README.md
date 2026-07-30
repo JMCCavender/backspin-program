@@ -22,6 +22,12 @@ roster.
   (watched = union, positions = newest wins, quiz = best score wins).
   Quiz scores sync trimmed to `{videoId: bestScore}` to stay inside
   Clerk's 8KB metadata cap.
+- **Leaderboard**: every signed-in user gets a "Leaderboard" button that
+  calls `GET /api/leaderboard` ([api/leaderboard.js](api/leaderboard.js)) —
+  JWT-verified but not admin-gated, so it returns only aggregate stats per
+  player (watched count, quiz points, perfect quizzes), never per-video
+  detail. Standings rank by videos watched, then quiz points (sum of best
+  scores), then perfect quizzes; the caller's own row is highlighted.
 - **Coach view**: users with `publicMetadata.role === "admin"` get a
   "Coach view" button that calls `GET /api/roster` — a Vercel serverless
   function ([api/roster.js](api/roster.js)) that verifies the Clerk JWT,
